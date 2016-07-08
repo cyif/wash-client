@@ -1,5 +1,6 @@
-package com.zju.chen.wash_client;
+package com.zju.chen.wash_client.view.activity;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,23 +13,37 @@ import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.Request.Method;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.zju.chen.wash_client.R;
+import com.zju.chen.wash_client.model.Account;
+import com.zju.chen.wash_client.util.UTF8CodeConvert;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Timer;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
+
+    String json = "{\"code\": 1, \"result\": [{\"address\": \"address2\",\"name\":\"haha2\",\"id\":2,\"email\":\"email2\"},"+
+            "{\"address\":\"address\",\"name\":\"haha\",\"id\":1,\"email\":\"email\"}]}";
 
     private int num = 0;
     private String url;
@@ -65,36 +80,32 @@ public class MainActivity extends AppCompatActivity {
 
     private void getTestJson() {
 
-        url = "http://apis.baidu.com/apistore/idservice/id";
+        url = "http://115.28.61.157:5000/user/status/all";
         final TextView textView = (TextView)findViewById(R.id.textView);
-        final EditText editText = (EditText)findViewById(R.id.editText);
-        id = "id=" + editText.getText().toString();
-        String httpUrl = url + '?' + id;
-        JsonObjectRequest req = new JsonObjectRequest(httpUrl, null,
-                new Response.Listener<JSONObject>() {
+        String httpUrl = url;
+        StringRequest req = new StringRequest(Method.GET, httpUrl,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONObject response) {
-                        result = response.toString();
-                        VolleyLog.v("Response:%n %s", result);
+                    public void onResponse(String response) {
+                        try {
+                            VolleyLog.d("%s", response);
+                            VolleyLog.d("%s", json);
+                            JSONObject jsonObject = new JSONObject(json);
+                            VolleyLog.v("Response:%n %s", jsonObject);
+                            textView.setText(jsonObject.toString());
 
-                        textView.setText(result);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-                        VolleyLog.e("Error : ", error.getMessage());
+                        VolleyLog.e("Error : ", error.toString());
                     }
-                }) {
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        HashMap<String ,String> headers = new HashMap<String ,String>();
-                        headers.put("apikey", apiKey);
-
-                        return headers;
-                    }
-        };
+                });
 
         Volley.newRequestQueue(this).add(req);
     }
