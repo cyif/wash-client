@@ -57,12 +57,16 @@ public class status_activity extends AppCompatActivity implements NavigationView
 
         if (id == R.id.nav_homepage) {
             Intent intent=new Intent(status_activity.this,MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
+            overridePendingTransition(0, 0);
         } else if (id == R.id.nav_status) {
 
         } else if (id == R.id.nav_log) {
             Intent intent=new Intent(status_activity.this,log_activity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
+            overridePendingTransition(0, 0);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

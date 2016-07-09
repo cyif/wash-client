@@ -116,10 +116,14 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_status) {
             Intent intent=new Intent(MainActivity.this,status_activity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
+            overridePendingTransition(0, 0);
         } else if (id == R.id.nav_log) {
             Intent intent=new Intent(MainActivity.this,log_activity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
+            overridePendingTransition(0, 0);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

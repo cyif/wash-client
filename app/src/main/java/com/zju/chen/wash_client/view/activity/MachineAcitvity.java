@@ -42,6 +42,10 @@ public class MachineAcitvity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_machines);
 
+        //toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         app = (CustomApplication)getApplication();
 
         Bundle extra = getIntent().getExtras();
