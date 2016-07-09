@@ -1,30 +1,24 @@
 package com.zju.chen.wash_client.view.activity;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.zju.chen.wash_client.R;
+import com.zju.chen.wash_client.model.Room;
 import com.zju.chen.wash_client.net.RoomController;
 import com.zju.chen.wash_client.util.CustomApplication;
 import com.zju.chen.wash_client.view.adapter.RoomAdapter;
-
-import java.util.logging.LogRecord;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,19 +27,27 @@ public class MainActivity extends AppCompatActivity
 
     private ListView lv;
     private RoomController roomController;
+    private RoomAdapter roomAdapter;
 
     private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+        Log.d("!!!!!!!!!!!!", "Start!!!!!!!");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        Log.d("!!!!!!!!!!!!", "2!!!!!!!");
         app = (CustomApplication)getApplication();
+        Log.d("!!!!!!!!!!!!", "3!!!!!!!");
 
         lv = (ListView)findViewById(R.id.listView);
+        lv.toString();
+        Log.d("!!!!!!!!!!", "4!!!!!!!!!!");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().findItem(R.id.nav_homepage).setChecked(true);
 
         String[] test = new String[] {"1", "22", "333"};
 
@@ -75,9 +78,9 @@ public class MainActivity extends AppCompatActivity
             public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case 1:
-                        Log.d("!!!!!!!!!!!", roomController.getRoomList().toString());
-                        RoomAdapter adapter = new RoomAdapter(MainActivity.this, R.layout.room_list, roomController.getRoomList());
-                        lv.setAdapter(adapter);
+                        roomAdapter = new RoomAdapter(MainActivity.this, R.layout.room_list, roomController.getRoomList());
+                        lv.setAdapter(roomAdapter);
+                        Log.d("!!!!!!!", "5!!!!!!!");
                         break;
                     default:
                         super.handleMessage(msg);
@@ -87,7 +90,6 @@ public class MainActivity extends AppCompatActivity
         };
 
         roomController.getRooms(handler);
-
     }
 
     @Override
@@ -100,6 +102,13 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.getMenu().findItem(R.id.nav_homepage).setChecked(true);
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -107,11 +116,13 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_homepage) {
-            // Handle the camera action
+
         } else if (id == R.id.nav_status) {
-
+            Intent intent=new Intent(MainActivity.this,status_activity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_log) {
-
+            Intent intent=new Intent(MainActivity.this,log_activity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
