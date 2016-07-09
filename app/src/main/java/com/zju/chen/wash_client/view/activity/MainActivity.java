@@ -12,6 +12,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.zju.chen.wash_client.R;
@@ -34,20 +36,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
-        Log.d("!!!!!!!!!!!!", "Start!!!!!!!");
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Log.d("!!!!!!!!!!!!", "2!!!!!!!");
         app = (CustomApplication)getApplication();
-        Log.d("!!!!!!!!!!!!", "3!!!!!!!");
 
         lv = (ListView)findViewById(R.id.listView);
         lv.toString();
-        Log.d("!!!!!!!!!!", "4!!!!!!!!!!");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -80,7 +76,8 @@ public class MainActivity extends AppCompatActivity
                     case 1:
                         roomAdapter = new RoomAdapter(MainActivity.this, R.layout.room_list, roomController.getRoomList());
                         lv.setAdapter(roomAdapter);
-                        Log.d("!!!!!!!", "5!!!!!!!");
+                        lv.setOnItemClickListener(roomListListener);
+
                         break;
                     default:
                         super.handleMessage(msg);
@@ -129,4 +126,15 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private AdapterView.OnItemClickListener roomListListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Room room = (Room)parent.getItemAtPosition(position);
+
+            Intent intent = new Intent(MainActivity.this, MachineAcitvity.class);
+            intent.putExtra("Room", room.getRoom());
+            startActivity(intent);
+        }
+    };
 }

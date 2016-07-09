@@ -9,11 +9,11 @@
         android:layout_width="138dp"
         android:layout_height="60dp"
         android:text=""
-        android:id="@+id/room" />
+        android:id="@+id/machine" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:text=""
-        android:id="@+id/num" />
+        android:id="@+id/time" />
 </LinearLayout>
