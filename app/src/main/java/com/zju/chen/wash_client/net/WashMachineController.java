@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,6 +31,11 @@ public class WashMachineController {
     private String url;
     private String httpUrl;
     private String params;
+
+    public WashMachineController() {
+        machineList.add(
+                new WashMachine(11111, 11111, 1, new Date(1000000000), new Date(2000000000)));
+    }
 
     public List<WashMachine> getMachineList() {
         return machineList;
@@ -80,6 +86,9 @@ public class WashMachineController {
                 });
 
         RequestManager.getInstance().getRequestQueue().add(jsonObjectRequest);
+        Message msg = new Message();
+        msg.what = 1;
+        handler.sendMessage(msg);
 
 
     }

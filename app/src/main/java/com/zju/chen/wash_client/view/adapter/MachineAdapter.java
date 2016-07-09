@@ -39,12 +39,14 @@ public class MachineAdapter extends ArrayAdapter<WashMachine> {
         TextView machineText = (TextView) view.findViewById(R.id.machine);
         TextView timeText = (TextView) view.findViewById(R.id.time);
 
-        machineText.setText("洗衣机编号: " + washMachine.getId());
+        machineText.setText("编号: " + washMachine.getId());
 
         if (washMachine.getStatus() != 0) {
 
             long time = washMachine.getEndTime().getTime() - washMachine.getBeginTime().getTime();
+            Log.d("Time!!!!!", time + "");
             TimeCount timeCount = new TimeCount(time, 1000, timeText);
+            timeCount.start();
         }
         else {
             timeText.setText("可用");
@@ -65,7 +67,6 @@ public class MachineAdapter extends ArrayAdapter<WashMachine> {
         @Override
         public void onFinish() {
             statusView.setText("可用");
-            statusView.setClickable(true);
         }
         @Override
         public void onTick(long millisUntilFinished){

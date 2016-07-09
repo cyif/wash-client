@@ -22,6 +22,8 @@ import com.zju.chen.wash_client.util.CustomApplication;
 import com.zju.chen.wash_client.view.adapter.MachineAdapter;
 import com.zju.chen.wash_client.view.adapter.RoomAdapter;
 
+import java.util.Date;
+
 /**
  * Created by chen on 16/7/9.
  */
