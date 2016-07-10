@@ -12,10 +12,15 @@
         android:layout_height="match_parent">
         <include
             android:id="@+id/abm"
-            layout="@layout/app_bar_main"
+            layout="@layout/app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
+        <include
+            layout="@layout/content_log"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/abm"
+            />
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView

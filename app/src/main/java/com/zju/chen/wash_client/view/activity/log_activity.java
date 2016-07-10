@@ -19,7 +19,7 @@ public class log_activity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_status);
+        setContentView(R.layout.activity_log);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -57,10 +57,15 @@ public class log_activity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_homepage) {
             Intent intent=new Intent(log_activity.this,MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
+            overridePendingTransition(0, 0);
+
         } else if (id == R.id.nav_status) {
             Intent intent=new Intent(log_activity.this,status_activity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent);
+            overridePendingTransition(0, 0);
         } else if (id == R.id.nav_log) {
 
         }
