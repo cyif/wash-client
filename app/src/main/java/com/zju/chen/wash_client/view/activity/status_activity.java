@@ -50,6 +50,7 @@ public class status_activity extends AppCompatActivity implements NavigationView
         navigationView.getMenu().findItem(R.id.nav_status).setChecked(true);
     }
 
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.

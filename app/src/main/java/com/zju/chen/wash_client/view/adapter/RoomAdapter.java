@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by chen on 16/7/9.
  */
-public class RoomAdapter extends ArrayAdapter<Room> {
+public class  RoomAdapter extends ArrayAdapter<Room> {
 
     private int mResourceId;
 
