@@ -52,16 +52,9 @@ public class MachineAcitvity extends AppCompatActivity {
         room = extra.getInt("Room");
 
         lv = (ListView)findViewById(R.id.machineListView);
-    }
-
-
-    @Override
-    public void onStart() {
-        super.onStart();
 
         washMachineController = new WashMachineController();
         washMachineController.setUrl(app.getUrl());
-
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -78,8 +71,8 @@ public class MachineAcitvity extends AppCompatActivity {
                 }
             }
         };
-
         washMachineController.getWashMachineByRoom(handler, room);
     }
+
 
 }

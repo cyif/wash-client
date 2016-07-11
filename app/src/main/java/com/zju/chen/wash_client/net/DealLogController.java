@@ -1,18 +1,15 @@
 package com.zju.chen.wash_client.net;
 
-import android.app.Application;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zju.chen.wash_client.model.DealLog;
 import com.zju.chen.wash_client.model.Room;
-import com.zju.chen.wash_client.util.CustomApplication;
 import com.zju.chen.wash_client.util.JacksonUtil;
 import com.zju.chen.wash_client.util.RequestManager;
 
@@ -20,34 +17,23 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Type;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TimeZone;
 
 /**
- * Created by chen on 16/7/9.
+ * Created by chen on 16/7/10.
  */
-public class RoomController {
+public class DealLogController {
 
     private String url;
     private String params;
     private String httpUrl;
 
-    public List<Room> getRoomList() {
-        return roomList;
-    }
+    public List<DealLog> dealLogList = new ArrayList<DealLog>();
 
-    public void setRoomList(List<Room> roomList) {
-        this.roomList = roomList;
-    }
-
-    private List<Room> roomList = new ArrayList<Room>();
-
-    public void getRooms(final Handler handler) {
-        params = "/user/status/all";
+    public void getDealLog(final Handler handler, String tel) {
+        params = "/user/store/record/tel/" + tel;
         httpUrl = url + params;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(httpUrl, null,
                 new Response.Listener<JSONObject>() {
@@ -56,10 +42,9 @@ public class RoomController {
                         try {
                             JSONArray jsonArray = response.getJSONArray("result");
 
-                            VolleyLog.d("%s", jsonArray.toString());
-
-                            roomList = JacksonUtil.parseJson(jsonArray.toString(), new TypeReference<List<Room>>() {
-                            }, null);
+                            VolleyLog.d("JSONARRAY ------- %s", jsonArray.toString());
+                            dealLogList = JacksonUtil.parseJson(jsonArray.toString(), new TypeReference<List<DealLog>>() {
+                            }, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
 
                             Message msg = new Message();
                             msg.what = 1;
@@ -79,11 +64,37 @@ public class RoomController {
         RequestManager.getInstance().getRequestQueue().add(jsonObjectRequest);
     }
 
+
+
     public String getUrl() {
         return url;
     }
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getParams() {
+        return params;
+    }
+
+    public void setParams(String params) {
+        this.params = params;
+    }
+
+    public String getHttpUrl() {
+        return httpUrl;
+    }
+
+    public void setHttpUrl(String httpUrl) {
+        this.httpUrl = httpUrl;
+    }
+
+    public List<DealLog> getDealLogList() {
+        return dealLogList;
+    }
+
+    public void setDealLogList(List<DealLog> dealLogList) {
+        this.dealLogList = dealLogList;
     }
 }

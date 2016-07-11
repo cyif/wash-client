@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity
         app = (CustomApplication)getApplication();
 
         lv = (ListView)findViewById(R.id.listView);
-        lv.toString();
+        //lv.toString();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -60,9 +60,9 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().findItem(R.id.nav_homepage).setChecked(true);
 
-        String[] test = new String[] {"1", "22", "333"};
+        //String[] test = new String[] {"1", "22", "333"};
 
-        ListView lv = (ListView)findViewById(R.id.listView);
+        //ListView lv = (ListView)findViewById(R.id.listView);
 
         imageButton=(ImageButton)findViewById(R.id.code);
         imageButton.setOnClickListener(new Button.OnClickListener(){

@@ -18,9 +18,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * Created by chen on 16/7/9.
@@ -31,11 +36,6 @@ public class WashMachineController {
     private String url;
     private String httpUrl;
     private String params;
-
-    public WashMachineController() {
-        machineList.add(
-                new WashMachine(11111, 11111, 1, new Date(1000000000), new Date(2000000000)));
-    }
 
     public List<WashMachine> getMachineList() {
         return machineList;
@@ -66,9 +66,20 @@ public class WashMachineController {
                             JSONArray jsonArray = response.getJSONArray("result");
 
                             VolleyLog.d("@@@@@@@@@@@@%s", jsonArray.toString());
-                            machineList = JacksonUtil.parseJson(jsonArray.toString(), new TypeReference<List<WashMachine>>() {
-                            });
+                            /*DateFormat format=new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z");
+                            format.setTimeZone(TimeZone.getTimeZone("GMT"));*/
 
+                            DateFormat format=new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US);
+                            format.setTimeZone(TimeZone.getTimeZone("GMT"));
+                            try {
+                                VolleyLog.d("DATE!!!!!     %s", format.parse("Mon, 03 Jun 2013 07:01:29 GMT").toString());
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            machineList = JacksonUtil.parseJson(jsonArray.toString(), new TypeReference<List<WashMachine>>() {
+                            }, format);
+
+                            machineList.add(0, new WashMachine(-1, 0, -1, null, null));
                             Log.d("MachineList.size()", machineList.size() + "");
                             Message msg = new Message();
                             msg.what = 1;
@@ -86,10 +97,6 @@ public class WashMachineController {
                 });
 
         RequestManager.getInstance().getRequestQueue().add(jsonObjectRequest);
-        Message msg = new Message();
-        msg.what = 1;
-        handler.sendMessage(msg);
-
 
     }
 }
