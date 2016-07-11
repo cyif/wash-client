@@ -1,19 +1,23 @@
 package com.zju.chen.wash_client.view.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.zju.chen.wash_client.R;
@@ -32,6 +36,7 @@ public class MainActivity extends AppCompatActivity
     private RoomAdapter roomAdapter;
 
     private Handler handler;
+    ImageButton imageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +64,16 @@ public class MainActivity extends AppCompatActivity
 
         //ListView lv = (ListView)findViewById(R.id.listView);
 
-
+        imageButton=(ImageButton)findViewById(R.id.code);
+        imageButton.setOnClickListener(new Button.OnClickListener(){
+            public void onClick(View v){
+                Dialog dialog = new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("hello").create();
+                dialog.show();
+            }
+        });
     }
+
 
     @Override
     public void onStart() {
@@ -105,6 +118,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.getMenu().findItem(R.id.nav_homepage).setChecked(true);
     }
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
