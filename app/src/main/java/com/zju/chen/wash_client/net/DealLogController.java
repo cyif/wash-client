@@ -41,7 +41,7 @@ public class DealLogController {
                         try {
                             JSONArray jsonArray = response.getJSONArray("result");
 
-                            VolleyLog.d("%s", jsonArray.toString());
+                            VolleyLog.d("JSONARRAY ------- %s", jsonArray.toString());
                             dealLogList = JacksonUtil.parseJson(jsonArray.toString(), new TypeReference<List<DealLog>>() {
                             });
 
