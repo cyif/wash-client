@@ -7,16 +7,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 /**
  * Created by chen on 16/7/9.
  */
 public class JacksonUtil {
-    private static final ObjectMapper JACKSON_MAPPER = new ObjectMapper();
-    private static SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static ObjectMapper JACKSON_MAPPER = new ObjectMapper();
+    //private static SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    public static <T> T parseJson(String jsonString, TypeReference<T> typeOfT) {
+    public static <T> T parseJson(String jsonString, TypeReference<T> typeOfT, DateFormat fmt) {
+
         JACKSON_MAPPER.setDateFormat(fmt);
         T t = null;
         try {

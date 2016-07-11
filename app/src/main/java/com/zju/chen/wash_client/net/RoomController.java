@@ -21,8 +21,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * Created by chen on 16/7/9.
@@ -54,8 +57,9 @@ public class RoomController {
                             JSONArray jsonArray = response.getJSONArray("result");
 
                             VolleyLog.d("%s", jsonArray.toString());
+
                             roomList = JacksonUtil.parseJson(jsonArray.toString(), new TypeReference<List<Room>>() {
-                            });
+                            }, null);
 
                             Message msg = new Message();
                             msg.what = 1;

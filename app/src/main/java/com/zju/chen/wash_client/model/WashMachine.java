@@ -13,6 +13,7 @@ public class WashMachine {
     private Date beginTime;
     private Date endTime;
 
+    public WashMachine(){}
     public WashMachine(int id, int location, int status, Date beginTime, Date endTime) {
         this.id = id;
         this.location = location;

@@ -17,6 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class DealLogController {
 
                             VolleyLog.d("JSONARRAY ------- %s", jsonArray.toString());
                             dealLogList = JacksonUtil.parseJson(jsonArray.toString(), new TypeReference<List<DealLog>>() {
-                            });
+                            }, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
 
                             Message msg = new Message();
                             msg.what = 1;
