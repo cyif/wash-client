@@ -10,12 +10,7 @@ import android.widget.LinearLayout;
 
 import com.zju.chen.wash_client.R;
 import com.zju.chen.wash_client.model.Code;
-import com.zju.chen.wash_client.model.Type;
-import com.zju.chen.wash_client.util.JacksonUtil;
 import com.zju.chen.wash_client.view.adapter.ChooseAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by ab on 2016/7/11.
