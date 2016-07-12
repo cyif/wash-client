@@ -1,9 +1,14 @@
 package com.zju.chen.wash_client.model;
 
+import java.io.Serializable;
+
 /**
  * Created by chen on 16/7/8.
  */
-public class Account {
+public class Account implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
 
     private String accountName;
     private long money;

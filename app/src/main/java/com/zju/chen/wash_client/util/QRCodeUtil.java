@@ -31,8 +31,6 @@ public class QRCodeUtil {
             BitMatrix bitMatrix = new QRCodeWriter().encode(info, BarcodeFormat.QR_CODE, width, height, hints);
 
             int[] pixels = new int[width * height];
-            // 下面这里按照二维码的算法，逐个生成二维码的图片，
-            // 两个for循环是图片横列扫描的结果
             for (int y = 0; y < height; y++) {
                 for (int x = 0; x < width; x++) {
                     if (bitMatrix.get(x, y)) {

@@ -27,5 +27,5 @@ dependencies {
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'com.fasterxml.jackson.core:jackson-core:2.1.4'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.1.4'
-    compile files('libs/core_3.2.0.jar')
+    compile files('libs/core-2.3.0.jar')
 }
