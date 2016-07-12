@@ -1,6 +1,7 @@
 package com.zju.chen.wash_client.view.activity;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -182,7 +183,7 @@ public class MainActivity extends AppCompatActivity
                         .show();
             }
             else {
-                Intent intent = new Intent(this, TestActivity.class);
+                Intent intent = new Intent(this, choose_activity.class);
                 intent.putExtra("Code", code);
                 startActivity(intent);
             }

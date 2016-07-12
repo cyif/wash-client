@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by chen on 16/7/10.
  */
-public class LogAdapter extends ArrayAdapter<DealLog> {
+public class    LogAdapter extends ArrayAdapter<DealLog> {
 
     private int mResourceId;
 

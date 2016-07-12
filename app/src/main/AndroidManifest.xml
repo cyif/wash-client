@@ -68,7 +68,8 @@
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
 
-        <activity android:name=".view.activity.TestActivity"
+
+        <activity android:name=".view.activity.choose_activity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTask">
