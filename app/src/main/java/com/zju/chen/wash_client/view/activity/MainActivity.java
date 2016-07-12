@@ -1,6 +1,7 @@
 package com.zju.chen.wash_client.view.activity;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -67,8 +68,15 @@ public class MainActivity extends AppCompatActivity
         imageButton=(ImageButton)findViewById(R.id.code);
         imageButton.setOnClickListener(new Button.OnClickListener(){
             public void onClick(View v){
-                Dialog dialog = new AlertDialog.Builder(MainActivity.this)
-                        .setTitle("hello").create();
+                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                dialog.setTitle("title");
+                dialog.setMessage("message");
+                dialog.setPositiveButton("ok",new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog,int which){
+                        Intent intent=new Intent(MainActivity.this,choose_activity.class);
+                        startActivity(intent);
+                    }
+                }).create();
                 dialog.show();
             }
         });
