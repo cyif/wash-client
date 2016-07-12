@@ -8,11 +8,18 @@
     tools:context=".view.activity.MainActivity"
     android:id="@+id/i">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="模式选择"
+        android:gravity="center"
+        android:id="@+id/choose_title"
+        android:textSize="30dp" />
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:id="@+id/scrollView"
-        android:layout_alignParentTop="true">
+        android:layout_below="@id/choose_title">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
@@ -23,9 +30,12 @@
         </LinearLayout>
     </HorizontalScrollView>
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
         android:layout_below="@id/scrollView"
+        android:id="@+id/button_choose"
         android:text="pay"
-        android:layout_centerHorizontal="true"/>
+        android:visibility="invisible"
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp" />
 </RelativeLayout>
