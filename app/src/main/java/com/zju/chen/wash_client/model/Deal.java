@@ -12,6 +12,11 @@ public class Deal implements Serializable{
 
     private int id;
     private int from;
-    private int to;
-    private int money;
+    private String to;
+    private double money;
+    public void setFrom(int from){this.from=from;}
+    public void setTo(String to){this.to=to;}
+    public void setMoney(double money){this.money=money;}
+    public String getTo(){return to;}
+    public double getMoney(){return money;}
 }

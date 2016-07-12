@@ -1,7 +1,10 @@
 package com.zju.chen.wash_client.view.activity;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -15,6 +18,7 @@ import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.zju.chen.wash_client.R;
 import com.zju.chen.wash_client.model.Deal;
@@ -44,6 +48,24 @@ public class choose_activity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.choose_toolbar);
         setSupportActionBar(toolbar);
         button=(Button)findViewById(R.id.button_choose);
+        button.setOnClickListener(new Button.OnClickListener(){
+            public void onClick(View v){
+                Dialog dialog = new AlertDialog.Builder(choose_activity.this)
+                .setTitle("pay:")
+                .setMessage(deal.getMoney()+"")
+                .setPositiveButton("yes",new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog,int which){
+
+                    }
+                })
+                .setNegativeButton("no",new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog,int which){
+
+                    }
+                }).create();
+                dialog.show();
+            }
+        });
         deal=new Deal();
 
         code = (Code) getIntent().getSerializableExtra("Code");
@@ -56,6 +78,7 @@ public class choose_activity extends AppCompatActivity {
         LIEWIDTH=dm.widthPixels/numPerLine;
         setValue();
         gridView.setOnItemClickListener(chooseListListener);
+
     }
 
 
@@ -81,8 +104,9 @@ public class choose_activity extends AppCompatActivity {
     private AdapterView.OnItemClickListener chooseListListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-           Type choose=(Type)parent.getItemAtPosition(position);
-
+            Type choose=(Type)parent.getItemAtPosition(position);
+            deal.setMoney(choose.getPrice());
+            deal.setTo(code.getAccount());
 
             button.setText("pay: "+choose.getPrice());
             button.setVisibility(View.VISIBLE);
