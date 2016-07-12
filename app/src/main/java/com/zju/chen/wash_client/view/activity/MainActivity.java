@@ -13,6 +13,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,11 +22,20 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.zju.chen.wash_client.R;
+import com.zju.chen.wash_client.model.Code;
 import com.zju.chen.wash_client.model.Room;
 import com.zju.chen.wash_client.net.RoomController;
 import com.zju.chen.wash_client.util.CustomApplication;
+import com.zju.chen.wash_client.util.JacksonUtil;
 import com.zju.chen.wash_client.view.adapter.RoomAdapter;
+import com.zju.chen.wash_client.zxing.activity.CaptureActivity;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -68,16 +78,8 @@ public class MainActivity extends AppCompatActivity
         imageButton=(ImageButton)findViewById(R.id.code);
         imageButton.setOnClickListener(new Button.OnClickListener(){
             public void onClick(View v){
-                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
-                dialog.setTitle("title");
-                dialog.setMessage("message");
-                dialog.setPositiveButton("ok",new DialogInterface.OnClickListener(){
-                    public void onClick(DialogInterface dialog,int which){
-                        Intent intent=new Intent(MainActivity.this,choose_activity.class);
-                        startActivity(intent);
-                    }
-                }).create();
-                dialog.show();
+                Intent intent = new Intent(MainActivity.this, CaptureActivity.class);
+                startActivityForResult(intent, 1);
             }
         });
     }
@@ -163,4 +165,29 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         }
     };
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            String result = data.getStringExtra("result");
+            Code code = JacksonUtil.parseJson(result, new TypeReference<Code>() {
+            }, null);
+
+            if (code == null) {
+                new AlertDialog.Builder(this).setTitle("错误！")
+                        .setMessage("数据格式错误！")
+                        .setPositiveButton("确定", null)
+                        .show();
+            }
+            else {
+                Intent intent = new Intent(this, choose_activity.class);
+                intent.putExtra("Code", code);
+                startActivity(intent);
+            }
+        }
+
+    }
 }

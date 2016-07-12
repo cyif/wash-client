@@ -15,16 +15,13 @@ import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 
 import com.zju.chen.wash_client.R;
 import com.zju.chen.wash_client.model.Deal;
 import com.zju.chen.wash_client.model.Room;
-import com.zju.chen.wash_client.model.type;
+import com.zju.chen.wash_client.model.Type;
+import com.zju.chen.wash_client.model.Code;
 import com.zju.chen.wash_client.view.adapter.ChooseAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by ab on 2016/7/11.
@@ -38,6 +35,8 @@ public class choose_activity extends AppCompatActivity {
     Button button;
     Deal deal;
 
+    private Code code;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -46,6 +45,8 @@ public class choose_activity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         button=(Button)findViewById(R.id.button_choose);
         deal=new Deal();
+
+        code = (Code) getIntent().getSerializableExtra("Code");
 
         horizontalScrollView = (HorizontalScrollView) findViewById(R.id.scrollView);
         gridView = (GridView) findViewById(R.id.gridView);
@@ -56,14 +57,17 @@ public class choose_activity extends AppCompatActivity {
         setValue();
         gridView.setOnItemClickListener(chooseListListener);
     }
+
+
     private void getScreenDen(){
         dm=new DisplayMetrics() ;
         getWindowManager().getDefaultDisplay().getMetrics(dm);
     }
-    private void setValue(){
-        List<type> list=new ArrayList<type>();
 
-        ChooseAdapter adapter=new ChooseAdapter(this,R.layout.choose_list,list);
+
+    private void setValue(){
+
+        ChooseAdapter adapter=new ChooseAdapter(this, R.layout.choose_list, code.getTypes());
         gridView.setAdapter(adapter);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(adapter.getCount() * LIEWIDTH,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -77,7 +81,7 @@ public class choose_activity extends AppCompatActivity {
     private AdapterView.OnItemClickListener chooseListListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-           type choose=(type)parent.getItemAtPosition(position);
+           Type choose=(Type)parent.getItemAtPosition(position);
 
 
             button.setText("pay: "+choose.getPrice());
