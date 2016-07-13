@@ -4,11 +4,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request.Method;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.zju.chen.wash_client.model.Room;
 import com.zju.chen.wash_client.model.WashMachine;
@@ -27,6 +29,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 
 /**
@@ -103,31 +106,26 @@ public class WashMachineController {
     }
 
     public void startWashMachine(final Handler handler, int id,
-                                 String account, int type, double money) {
+                                 final String account, final int type, final double money) {
 
-        params = "/user/wash/begin/" + id;
+        params = "/user/begin/" + id;
         httpUrl = url + params;
 
-        HashMap<String, String> map = new HashMap<>();
-        map.put("account_name", account);
-        map.put("wash_type", type + "");
-        map.put("wash_money", money + "");
 
-        JSONObject jsonObject = new JSONObject(map);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Method.POST, url, jsonObject,
-                new Response.Listener<JSONObject>() {
+        VolleyLog.d("URL!!!!!!!!!!!   %s", httpUrl);
+        StringRequest stringRequest = new StringRequest(Method.POST, httpUrl,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            Message msg = new Message();
+                    public void onResponse(String response) {
+                        //VolleyLog.d("StartWashMachine-----------------");
+
+                            /*Message msg = new Message();
                             msg.what = response.getInt("code");
-                            //handler.sendMessage(msg);*
-                            if (msg.what == 0)
-                                VolleyLog.d("StartWashMachine!!!!!");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                            handler.sendMessage(msg);*/
+                            VolleyLog.d("StartWashMachine!!!!!       %s", response);
+
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -138,7 +136,17 @@ public class WashMachineController {
                         handler.sendMessage(msg);
                         error.printStackTrace();
                     }
-                });
+                }){
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> map = new HashMap<>();
+                        map.put("account_name", account);
+                        map.put("wash_money", money + "");
+                        map.put("wash_type", type + "");
+                        return map;
+                    }
+        };
 
+        RequestManager.getInstance().getRequestQueue().add(stringRequest);
     }
 }

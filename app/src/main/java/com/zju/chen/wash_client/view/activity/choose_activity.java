@@ -178,7 +178,7 @@ public class choose_activity extends AppCompatActivity {
 
     private void startWashMachine(int status, double money) {
         WashMachineController wmc = new WashMachineController();
-        wmc.setUrl(app.getUrl2());
+        wmc.setUrl(app.getUrl());
         wmc.startWashMachine(new Handler(), code.getWashId(), app.getAccountName(), status, money);
     }
 }
