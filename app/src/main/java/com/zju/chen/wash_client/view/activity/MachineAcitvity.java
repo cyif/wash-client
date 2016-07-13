@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,6 +23,7 @@ import com.zju.chen.wash_client.net.WashMachineController;
 import com.zju.chen.wash_client.util.CustomApplication;
 import com.zju.chen.wash_client.view.adapter.MachineAdapter;
 import com.zju.chen.wash_client.view.adapter.RoomAdapter;
+import com.zju.chen.wash_client.zxing.activity.CaptureActivity;
 
 import java.util.Date;
 
@@ -36,6 +39,7 @@ public class MachineAcitvity extends AppCompatActivity {
 
     private Handler handler;
     private int room;
+    ImageButton imageButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,6 +76,14 @@ public class MachineAcitvity extends AppCompatActivity {
             }
         };
         washMachineController.getWashMachineByRoom(handler, room);
+
+        imageButton=(ImageButton)findViewById(R.id.code);
+        imageButton.setOnClickListener(new Button.OnClickListener(){
+            public void onClick(View v){
+                Intent intent = new Intent(MachineAcitvity.this, CaptureActivity.class);
+                startActivityForResult(intent, 1);
+            }
+        });
     }
 
 

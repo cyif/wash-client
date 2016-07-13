@@ -9,13 +9,19 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.zju.chen.wash_client.R;
+import com.zju.chen.wash_client.zxing.activity.CaptureActivity;
 
 /**
  * Created by ab on 2016/7/8.
  */
 public class status_activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+    ImageButton imageButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -33,6 +39,14 @@ public class status_activity extends AppCompatActivity implements NavigationView
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().findItem(R.id.nav_status).setChecked(true);
+
+        imageButton=(ImageButton)findViewById(R.id.code);
+        imageButton.setOnClickListener(new Button.OnClickListener(){
+            public void onClick(View v){
+                Intent intent = new Intent(status_activity.this, CaptureActivity.class);
+                startActivityForResult(intent, 1);
+            }
+        });
     }
     @Override
     public void onBackPressed() {
