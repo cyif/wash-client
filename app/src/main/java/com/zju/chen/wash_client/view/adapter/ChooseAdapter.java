@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.zju.chen.wash_client.R;
+import com.zju.chen.wash_client.model.Type;
 
 import java.util.List;
 

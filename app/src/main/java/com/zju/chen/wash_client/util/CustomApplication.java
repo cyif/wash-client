@@ -4,6 +4,11 @@ import android.app.Application;
 import android.os.Debug;
 import android.util.Log;
 
+import com.zju.chen.wash_client.model.WashMachine;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by chen on 16/7/8.
  */
@@ -18,6 +23,8 @@ public class CustomApplication extends Application{
     private String url;
     private String url2;
     private String tel;
+    private String accountName;
+    private List<WashMachine> myWashMachineList;
 
     @Override
     public void onCreate() {
@@ -28,6 +35,7 @@ public class CustomApplication extends Application{
         setUrl(URL);
         setUrl2(URL2);
         setTel(TESTTEL);
+        myWashMachineList = new ArrayList<WashMachine>();
     }
 
 
@@ -53,5 +61,13 @@ public class CustomApplication extends Application{
 
     public void setTel(String tel) {
         this.tel = tel;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
     }
 }

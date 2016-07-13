@@ -11,6 +11,7 @@ public class Type implements Serializable {
 
     private String name;
     private double price;
+    private int status;
 
     public String getName() {
         return name;
@@ -26,5 +27,13 @@ public class Type implements Serializable {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

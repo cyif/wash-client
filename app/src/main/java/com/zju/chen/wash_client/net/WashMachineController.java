@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import com.android.volley.Request.Method;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
@@ -23,6 +24,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -97,6 +99,44 @@ public class WashMachineController {
                 });
 
         RequestManager.getInstance().getRequestQueue().add(jsonObjectRequest);
+
+    }
+
+    public void startWashMachine(final Handler handler, int id,
+                                 String account, int type, double money) {
+
+        params = "/user/wash/begin/" + id;
+        httpUrl = url + params;
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("account_name", account);
+        map.put("wash_type", type + "");
+        map.put("wash_money", money + "");
+
+        JSONObject jsonObject = new JSONObject(map);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Method.POST, url, jsonObject,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Message msg = new Message();
+                            msg.what = response.getInt("code");
+                            handler.sendMessage(msg);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Message msg = new Message();
+                        msg.what = 1;
+                        handler.sendMessage(msg);
+                        error.printStackTrace();
+                    }
+                });
 
     }
 }
