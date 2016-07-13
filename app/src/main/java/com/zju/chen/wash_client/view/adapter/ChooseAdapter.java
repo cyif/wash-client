@@ -31,9 +31,9 @@ public class ChooseAdapter extends ArrayAdapter<Type>{
         TextView wash_type = (TextView) view.findViewById(R.id.wash_type);
         TextView wash_price = (TextView) view.findViewById(R.id.wash_price);
 
-        wash_type.setText(choose.getName());
+        wash_type.setText("type:\n"+choose.getName());
         Log.d("!!!!!",choose.getName());
-        wash_price.setText(choose.getPrice() + "");
+        wash_price.setText("price:\n"+choose.getPrice() + "");
         Log.d("!!!!!",choose.getPrice()+"");
 
         return view;

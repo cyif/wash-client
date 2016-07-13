@@ -78,7 +78,7 @@ public class log_activity extends AppCompatActivity implements NavigationView.On
             }
         };
 
-        dealLogController.getDealLog(handler, app.getTel());
+        dealLogController.getDealLog(handler, app.getAccountName());
     }
 
     @Override

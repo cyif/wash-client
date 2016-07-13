@@ -18,11 +18,10 @@ public class CustomApplication extends Application{
 
     private static final String URL2 = "http://115.28.61.157:8080";
 
-    private static final String TESTTEL = "18868130765";
+    private static final String TESTACCOUNT = "18868130765";
 
     private String url;
     private String url2;
-    private String tel;
     private String accountName;
     private List<WashMachine> myWashMachineList;
 
@@ -34,7 +33,7 @@ public class CustomApplication extends Application{
         RequestManager.createInstance(getApplicationContext());
         setUrl(URL);
         setUrl2(URL2);
-        setTel(TESTTEL);
+        setAccountName(TESTACCOUNT);
         myWashMachineList = new ArrayList<WashMachine>();
     }
 
@@ -53,14 +52,6 @@ public class CustomApplication extends Application{
 
     public void setUrl2(String url2) {
         this.url2 = url2;
-    }
-
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
     }
 
     public String getAccountName() {
