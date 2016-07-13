@@ -122,7 +122,9 @@ public class WashMachineController {
                         try {
                             Message msg = new Message();
                             msg.what = response.getInt("code");
-                            handler.sendMessage(msg);
+                            //handler.sendMessage(msg);*
+                            if (msg.what == 0)
+                                VolleyLog.d("StartWashMachine!!!!!");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

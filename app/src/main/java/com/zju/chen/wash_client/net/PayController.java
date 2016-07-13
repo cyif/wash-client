@@ -26,6 +26,7 @@ public class PayController {
     private String url;
     private String params;
     private String httpUrl;
+    private int status;
 
     public void postDeal(final Handler handler) {
         params = "/user/user/wash/pay/";
@@ -44,6 +45,7 @@ public class PayController {
                             Bundle data = new Bundle();
                             data.putSerializable("Deal", deal);
                             data.putString("msg", response.getString("msg"));
+                            data.putInt("status", status);
                             msg.setData(data);
                             handler.sendMessage(msg);
                         } catch (JSONException e) {
@@ -87,5 +89,13 @@ public class PayController {
 
     public void setParams(String params) {
         this.params = params;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }
