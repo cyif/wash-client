@@ -11,6 +11,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.zju.chen.wash_client.R;
@@ -19,6 +22,7 @@ import com.zju.chen.wash_client.net.RoomController;
 import com.zju.chen.wash_client.util.CustomApplication;
 import com.zju.chen.wash_client.view.adapter.LogAdapter;
 import com.zju.chen.wash_client.view.adapter.RoomAdapter;
+import com.zju.chen.wash_client.zxing.activity.CaptureActivity;
 
 /**
  * Created by ab on 2016/7/9.
@@ -29,6 +33,7 @@ public class log_activity extends AppCompatActivity implements NavigationView.On
     private Handler handler;
     private DealLogController dealLogController;
     private LogAdapter logAdapter;
+    ImageButton imageButton;
 
     private ListView lv;
 
@@ -54,6 +59,13 @@ public class log_activity extends AppCompatActivity implements NavigationView.On
 
         lv = (ListView)findViewById(R.id.listView);
 
+        imageButton=(ImageButton)findViewById(R.id.code);
+        imageButton.setOnClickListener(new Button.OnClickListener(){
+            public void onClick(View v){
+                Intent intent = new Intent(log_activity.this, CaptureActivity.class);
+                startActivityForResult(intent, 1);
+            }
+        });
     }
 
     @Override
