@@ -1,6 +1,7 @@
 package com.zju.chen.wash_client.view.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,11 @@ import java.util.List;
  */
 public class ChooseAdapter extends ArrayAdapter<Type>{
     private int mResourceId;
+    private int clickTmp=-1;
+
+    public void setSelection(int position){
+        clickTmp=position;
+    }
 
     public ChooseAdapter(Context context, int resourceId, List<Type> objects) {
         super(context, resourceId, objects);
@@ -35,6 +41,12 @@ public class ChooseAdapter extends ArrayAdapter<Type>{
         Log.d("!!!!!",choose.getName());
         wash_price.setText("price:\n"+choose.getPrice() + "");
         Log.d("!!!!!",choose.getPrice()+"");
+
+        if(clickTmp==position){
+            view.setBackgroundResource(R.drawable.textview_border);
+        }else{
+            view.setBackgroundColor(Color.TRANSPARENT);
+        }
 
         return view;
     }

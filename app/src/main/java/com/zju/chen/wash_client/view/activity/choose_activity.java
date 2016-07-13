@@ -38,6 +38,7 @@ public class choose_activity extends AppCompatActivity {
     private int LIEWIDTH;
     Button button;
     Deal deal;
+    ChooseAdapter adapter;
 
     private Code code;
 
@@ -90,7 +91,7 @@ public class choose_activity extends AppCompatActivity {
 
     private void setValue(){
 
-        ChooseAdapter adapter=new ChooseAdapter(this, R.layout.choose_list, code.getTypes());
+        adapter=new ChooseAdapter(this, R.layout.choose_list, code.getTypes());
         gridView.setAdapter(adapter);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(adapter.getCount() * LIEWIDTH,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -107,6 +108,8 @@ public class choose_activity extends AppCompatActivity {
             Type choose=(Type)parent.getItemAtPosition(position);
             deal.setMoney(choose.getPrice());
             deal.setTo(code.getAccount());
+            adapter.setSelection(position);
+            adapter.notifyDataSetChanged();
 
             button.setText("pay: "+choose.getPrice());
             button.setVisibility(View.VISIBLE);
