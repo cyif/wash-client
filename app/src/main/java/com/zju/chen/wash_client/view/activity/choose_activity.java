@@ -98,6 +98,7 @@ public class choose_activity extends AppCompatActivity {
                                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                     @Override
                                     public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        status_activity.instance.finish();//finish
                                         Intent intent = new Intent(choose_activity.this, status_activity.class);
                                         startActivity(intent);
                                         finish();

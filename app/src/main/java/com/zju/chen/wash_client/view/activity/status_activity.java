@@ -12,6 +12,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -61,9 +62,12 @@ public class status_activity extends AppCompatActivity implements NavigationView
     private WashMachineController washMachineController;
     private StatusAdapter statusAdapter;
 
+    public static status_activity instance;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        instance=this;
         setContentView(R.layout.activity_status);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -98,12 +102,7 @@ public class status_activity extends AppCompatActivity implements NavigationView
         horizontalScrollView.setHorizontalScrollBarEnabled(false);
         getScreenDen();
         LIEWIDTH=dm.widthPixels/numPerLine;
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
+        Log.d("!!!!status_activity:","onCreate!!!!!!");
 
         washMachineController = new WashMachineController();
         washMachineController.setUrl(app.getUrl2());
@@ -127,6 +126,32 @@ public class status_activity extends AppCompatActivity implements NavigationView
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+
+       /* washMachineController = new WashMachineController();
+        washMachineController.setUrl(app.getUrl2());
+
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
+                    case 1:
+                        List<WashMachine> washMachineList = washMachineController.getMachineList();
+                        setValue(washMachineList);
+                        break;
+                    default:
+                        super.handleMessage(msg);
+                        break;
+                }
+            }
+        };
+
+        washMachineController.getWashMachineByAccount(handler, app.getAccountName());*/
+        Log.d("!!!!status_activity:","onStart!!!!!!");
+    }
+
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -140,6 +165,7 @@ public class status_activity extends AppCompatActivity implements NavigationView
         super.onResume();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.getMenu().findItem(R.id.nav_status).setChecked(true);
+        Log.d("!!!!status_activity:","onResume!!!!!!");
     }
 
 
