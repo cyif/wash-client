@@ -18,9 +18,18 @@
         <include
             layout="@layout/content_status"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@id/abm"
             />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/abm"
+            android:id="@+id/null_msg"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="没有正在使用的洗衣机" />
+
        </RelativeLayout>
 
     <android.support.design.widget.NavigationView

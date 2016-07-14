@@ -34,7 +34,6 @@ public class StatusAdapter extends ArrayAdapter<WashMachine> {
         View view = inflater.inflate(mResourceId, null);
         TextView status_id = (TextView) view.findViewById(R.id.status_id);
         TextView status_info = (TextView) view.findViewById(R.id.status_info);
-        ImageView status_image=(ImageView)view.findViewById(R.id.status_image);
 
         status_id.setText("machine id:  "+washMachine.getId());
         if(washMachine.getStatus()==1){

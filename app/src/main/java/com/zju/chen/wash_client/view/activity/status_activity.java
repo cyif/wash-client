@@ -35,6 +35,8 @@ import com.zju.chen.wash_client.view.adapter.StatusAdapter;
 import com.zju.chen.wash_client.util.CustomApplication;
 import com.zju.chen.wash_client.zxing.activity.CaptureActivity;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -191,6 +193,12 @@ public class status_activity extends AppCompatActivity implements NavigationView
     }
 
     private void setValue(List<WashMachine> washMachines){
+        TextView tv=(TextView)findViewById(R.id.null_msg);
+        if(washMachines.isEmpty())
+            tv.setVisibility(View.VISIBLE);
+        else
+            tv.setVisibility(View.GONE);
+
 
         adapter=new StatusAdapter(this, R.layout.status_list,washMachines);
         gridView.setAdapter(adapter);
