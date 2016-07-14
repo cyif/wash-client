@@ -18,7 +18,7 @@ public class LoginController {
     private String url;
     private String params;
 
-    public void getVerifyCode() {
+    public void sendVerifyCode() {
         String httpUrl = url + params + account;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(httpUrl,
@@ -49,6 +49,10 @@ public class LoginController {
 
     public void setAccount(String account) {
         this.account = account;
+    }
+
+    public String getVerifyCode() {
+        return this.verifyCode;
     }
 
     public void setVerifyCode(String verifyCode) {
