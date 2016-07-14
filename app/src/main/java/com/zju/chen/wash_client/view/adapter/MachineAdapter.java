@@ -97,7 +97,21 @@ public class MachineAdapter extends ArrayAdapter<WashMachine> {
         @Override
         public void onTick(long millisUntilFinished){
 
-            statusView.setText("剩余时间: " + millisUntilFinished /1000 + "秒");
+            millisUntilFinished /= 1000;
+            long hour = millisUntilFinished / (60 * 60);
+            long min = millisUntilFinished % (60 * 60) / 60;
+            long sec = millisUntilFinished % 60;
+
+            String time;
+            if (hour > 0) {
+                time = hour + "小时" + min + "分" + sec + "秒";
+            }
+            else if (min > 0) {
+                time = min + "分" + sec + "秒";
+            }
+            else
+                time = sec + "秒";
+            statusView.setText("剩余时间: " + time);
         }
     }
 }

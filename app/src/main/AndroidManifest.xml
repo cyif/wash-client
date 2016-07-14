@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.zju.chen.wash_client">
 
     <uses-permission  android:name="android.permission.INTERNET"/>
@@ -12,6 +13,7 @@
 
 
     <application
+        tools:replace="android:icon"
         android:name=".util.CustomApplication"
         android:allowBackup="true"
         android:icon="@mipmap/washing11"
