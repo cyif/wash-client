@@ -71,7 +71,7 @@ public class choose_activity extends AppCompatActivity {
         deal.setTo(code.getAccount());
 
         button=(Button)findViewById(R.id.button_choose);
-        final SweetAlertDialog sad = new SweetAlertDialog(choose_activity.this, SweetAlertDialog.WARNING_TYPE);
+        final SweetAlertDialog sad = new SweetAlertDialog(choose_activity.this, SweetAlertDialog.WARNING_TYPE);;
 
         handler = new Handler() {
             @Override
@@ -174,6 +174,12 @@ public class choose_activity extends AppCompatActivity {
                             }
                         })
                         .setCancelText("取消")
+                        .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                sweetAlertDialog.hide();
+                            }
+                        })
                         .show();
             }
         });
