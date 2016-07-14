@@ -120,6 +120,12 @@ public class choose_activity extends AppCompatActivity {
                         sad.setTitleText("支付失败")
                                 .setContentText((String) msg.getData().getString("msg"))
                                 .setConfirmText("确认")
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        sweetAlertDialog.hide();
+                                    }
+                                })
                                 .changeAlertType(SweetAlertDialog.ERROR_TYPE);
                         break;
                     default:
@@ -150,6 +156,7 @@ public class choose_activity extends AppCompatActivity {
                         }).create();
                 dialog.show();*/
 
+                sad.changeAlertType(SweetAlertDialog.WARNING_TYPE);
                 sad.setTitleText("支付确认")
                         .setContentText("支付 " + deal.getMoney() + "元")
                         .setConfirmText("确认")
