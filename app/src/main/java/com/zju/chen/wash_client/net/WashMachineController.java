@@ -115,7 +115,7 @@ public class WashMachineController {
 
         JSONObject jsonObject = new JSONObject(map);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Method.POST, url, jsonObject,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Method.POST, httpUrl, jsonObject,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -137,6 +137,6 @@ public class WashMachineController {
                         error.printStackTrace();
                     }
                 });
-
+        RequestManager.getInstance().getRequestQueue().add(jsonObjectRequest);
     }
 }

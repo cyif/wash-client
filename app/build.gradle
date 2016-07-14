@@ -28,4 +28,5 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-core:2.1.4'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.1.4'
     compile files('libs/core-2.3.0.jar')
+    compile 'info.hoang8f:fbutton:1.0.5'
 }

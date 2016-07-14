@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -15,12 +16,15 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.zju.chen.wash_client.R;
+import com.zju.chen.wash_client.model.Code;
 import com.zju.chen.wash_client.model.Room;
 import com.zju.chen.wash_client.model.WashMachine;
 import com.zju.chen.wash_client.net.RoomController;
 import com.zju.chen.wash_client.net.WashMachineController;
 import com.zju.chen.wash_client.util.CustomApplication;
+import com.zju.chen.wash_client.util.JacksonUtil;
 import com.zju.chen.wash_client.view.adapter.MachineAdapter;
 import com.zju.chen.wash_client.view.adapter.RoomAdapter;
 import com.zju.chen.wash_client.zxing.activity.CaptureActivity;
@@ -85,6 +89,25 @@ public class MachineAcitvity extends AppCompatActivity {
             }
         });
     }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            String result = data.getStringExtra("result");
+            Code code = JacksonUtil.parseJson(result, new TypeReference<Code>() {
+            }, null);
 
+            if (code == null) {
+                new AlertDialog.Builder(this).setTitle("错误！")
+                        .setMessage("数据格式错误！")
+                        .setPositiveButton("确定", null)
+                        .show();
+            } else {
+                Intent intent = new Intent(this, choose_activity.class);
+                intent.putExtra("Code", code);
+                startActivity(intent);
+            }
+        }
+    }
 
 }
