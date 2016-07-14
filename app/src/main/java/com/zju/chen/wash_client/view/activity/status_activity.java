@@ -6,23 +6,46 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridView;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.zju.chen.wash_client.R;
+import com.zju.chen.wash_client.model.Code;
+import com.zju.chen.wash_client.model.WashMachine;
+import com.zju.chen.wash_client.util.JacksonUtil;
+import com.zju.chen.wash_client.view.adapter.ChooseAdapter;
+import com.zju.chen.wash_client.view.adapter.StatusAdapter;
 import com.zju.chen.wash_client.util.CustomApplication;
 import com.zju.chen.wash_client.zxing.activity.CaptureActivity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by ab on 2016/7/8.
  */
 public class status_activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     ImageButton imageButton;
+    GridView gridView;
+    HorizontalScrollView horizontalScrollView;
+    private int numPerLine=1;
+    DisplayMetrics dm;
+    private int LIEWIDTH;
+    StatusAdapter adapter;
+    private WashMachine washMachine;
     CustomApplication app;
     TextView accountTextView;
 
@@ -56,6 +79,14 @@ public class status_activity extends AppCompatActivity implements NavigationView
                 startActivityForResult(intent, 1);
             }
         });
+
+        horizontalScrollView = (HorizontalScrollView) findViewById(R.id.scrollView_status);
+        gridView = (GridView) findViewById(R.id.gridView_status);
+
+        horizontalScrollView.setHorizontalScrollBarEnabled(false);
+        getScreenDen();
+        LIEWIDTH=dm.widthPixels/numPerLine;
+        setValue();
     }
     @Override
     public void onBackPressed() {
@@ -96,5 +127,49 @@ public class status_activity extends AppCompatActivity implements NavigationView
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            String result = data.getStringExtra("result");
+            Code code = JacksonUtil.parseJson(result, new TypeReference<Code>() {
+            }, null);
+
+            if (code == null) {
+                new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("出错")
+                        .setContentText("数据格式错误！")
+                        .setConfirmText("确定")
+                        .show();
+            } else {
+                Intent intent = new Intent(this, choose_activity.class);
+                intent.putExtra("Code", code);
+                startActivity(intent);
+            }
+        }
+    }
+    private void getScreenDen(){
+        dm=new DisplayMetrics() ;
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+    }
+    private void setValue(){
+        List<WashMachine> washMachines= new ArrayList<WashMachine>();
+        WashMachine wm1=new WashMachine();
+        wm1.setId(1);wm1.setStatus(1);
+        WashMachine wm2=new WashMachine();
+        wm2.setStatus(0);wm2.setId(2);
+        washMachines.add(wm1);
+        washMachines.add(wm2);
+
+        adapter=new StatusAdapter(this, R.layout.status_list,washMachines);
+        gridView.setAdapter(adapter);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(adapter.getCount() * LIEWIDTH,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        gridView.setLayoutParams(params);
+        gridView.setColumnWidth(dm.widthPixels / numPerLine);
+        gridView.setStretchMode(GridView.NO_STRETCH);
+        int count = adapter.getCount();
+        gridView.setNumColumns(count);
     }
 }

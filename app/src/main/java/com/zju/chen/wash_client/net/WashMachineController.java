@@ -111,9 +111,14 @@ public class WashMachineController {
 
 
 
+<<<<<<< HEAD
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Method.POST, httpUrl, jsonObject,
+                new Response.Listener<JSONObject>() {
+=======
         VolleyLog.d("URL!!!!!!!!!!!   %s", httpUrl);
         StringRequest stringRequest = new StringRequest(Method.POST, httpUrl,
                 new Response.Listener<String>() {
+>>>>>>> b2444b997a44a87664613f38cbc882e3e958e735
                     @Override
                     public void onResponse(String response) {
                         //VolleyLog.d("StartWashMachine-----------------");
@@ -134,6 +139,10 @@ public class WashMachineController {
                         handler.sendMessage(msg);
                         error.printStackTrace();
                     }
+<<<<<<< HEAD
+                });
+        RequestManager.getInstance().getRequestQueue().add(jsonObjectRequest);
+=======
                 }){
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
@@ -146,5 +155,6 @@ public class WashMachineController {
         };
 
         RequestManager.getInstance().getRequestQueue().add(stringRequest);
+>>>>>>> b2444b997a44a87664613f38cbc882e3e958e735
     }
 }

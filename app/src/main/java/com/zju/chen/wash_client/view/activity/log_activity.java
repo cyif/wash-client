@@ -8,6 +8,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -17,17 +18,22 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.zju.chen.wash_client.R;
+import com.zju.chen.wash_client.model.Code;
 import com.zju.chen.wash_client.model.DealLog;
 import com.zju.chen.wash_client.net.DealLogController;
 import com.zju.chen.wash_client.net.RoomController;
 import com.zju.chen.wash_client.util.CustomApplication;
+import com.zju.chen.wash_client.util.JacksonUtil;
 import com.zju.chen.wash_client.view.adapter.LogAdapter;
 import com.zju.chen.wash_client.view.adapter.RoomAdapter;
 import com.zju.chen.wash_client.zxing.activity.CaptureActivity;
 
 import java.util.Collections;
 import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by ab on 2016/7/9.
@@ -142,5 +148,26 @@ public class log_activity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            String result = data.getStringExtra("result");
+            Code code = JacksonUtil.parseJson(result, new TypeReference<Code>() {
+            }, null);
+
+            if (code == null) {
+                new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("出错")
+                        .setContentText("数据格式错误！")
+                        .setConfirmText("确定")
+                        .show();
+            } else {
+                Intent intent = new Intent(this, choose_activity.class);
+                intent.putExtra("Code", code);
+                startActivity(intent);
+            }
+        }
     }
 }
