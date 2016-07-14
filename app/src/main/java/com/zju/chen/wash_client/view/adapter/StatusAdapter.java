@@ -1,9 +1,6 @@
 package com.zju.chen.wash_client.view.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.media.Image;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zju.chen.wash_client.R;
-import com.zju.chen.wash_client.model.Type;
 import com.zju.chen.wash_client.model.WashMachine;
 
 import java.util.List;

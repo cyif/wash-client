@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zju.chen.wash_client.R;
@@ -38,13 +39,15 @@ public class MachineAdapter extends ArrayAdapter<WashMachine> {
         View view = inflater.inflate(mResourceId, null);
         TextView machineText = (TextView) view.findViewById(R.id.machine);
         TextView timeText = (TextView) view.findViewById(R.id.time);
+        ImageView iconImageView = (ImageView) view.findViewById(R.id.washMachineStateImageView);
 
-        machineText.setText("编号: " + washMachine.getId());
+        machineText.setText("机器编号: " + washMachine.getId());
 
         long time;
         switch (washMachine.getStatus()) {
             case 0 :
                 timeText.setText("可用");
+                iconImageView.setImageResource(R.drawable.washmachine_green);
                 return view;
             case 1 :
                 time = 60;
@@ -69,13 +72,14 @@ public class MachineAdapter extends ArrayAdapter<WashMachine> {
         /*if (washMachine.getBeginTime() != null && washMachine.getEndTime() != null)
                 time = washMachine.getEndTime().getTime() - washMachine.getBeginTime().getTime();*/
 
+        iconImageView.setImageResource(R.drawable.washmachine_red);
         if (washMachine.getEndTime() != null) {
             time = washMachine.getEndTime().getTime() - new Date().getTime();
             Log.d("Time!!!!!    ", washMachine.getEndTime().toString() + "        " + new Date().toString());
         }
 
         Log.d("Time!!!!!", time + "");
-        TimeCount timeCount = new TimeCount(time, 1000, timeText);
+        TimeCount timeCount = new TimeCount(time, 1000, timeText, iconImageView);
         timeCount.start();
 
         return view;
@@ -84,16 +88,20 @@ public class MachineAdapter extends ArrayAdapter<WashMachine> {
     class TimeCount extends CountDownTimer {
 
         TextView statusView;
+        ImageView imageView;
 
-        public TimeCount(long millisInFuture, long countDownInterval, View view) {
+        public TimeCount(long millisInFuture, long countDownInterval, View textView, View imageView) {
             super(millisInFuture, countDownInterval);
-            statusView = (TextView)view;
+            statusView = (TextView)textView;
+            this.imageView = (ImageView)imageView;
         }
 
         @Override
         public void onFinish() {
             statusView.setText("可用");
+            imageView.setImageResource(R.drawable.washmachine_red);
         }
+
         @Override
         public void onTick(long millisUntilFinished){
 

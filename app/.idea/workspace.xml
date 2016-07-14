@@ -22,12 +22,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f031f1be-f5a9-4db1-86ef-4286e04f00e9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/status_activity.java" afterPath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/status_activity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/res/drawable/washmachine_green.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/res/drawable/washmachine_red.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/MachineAcitvity.java" afterPath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/MachineAcitvity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/adapter/MachineAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/adapter/MachineAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/adapter/StatusAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/adapter/StatusAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/activity_status.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_status.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/content_status.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/content_status.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/content_machine.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/content_machine.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/machine_list.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/machine_list.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/room_list.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/room_list.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/status_list.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/status_list.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/src/main/res/values/strings.xml" />
     </list>
     <ignored path="app.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -129,8 +133,8 @@
       <file leaf-file-name="status_list.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/res/layout/status_list.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.12801932">
-              <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.40338165">
+              <caret line="31" column="37" selection-start-line="31" selection-start-column="37" selection-end-line="31" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -153,7 +157,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/adapter/StatusAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="38" column="39" selection-start-line="38" selection-start-column="39" selection-end-line="38" selection-end-column="39" />
+              <caret line="34" column="39" selection-start-line="34" selection-start-column="39" selection-end-line="34" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -2739,8 +2743,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="196" column="34" selection-start-line="196" selection-start-column="34" selection-end-line="196" selection-end-column="34" />
           <folding>
-            <element signature="e#4093#4581#0" expanded="true" />
-            <element signature="e#4580#4581#0" expanded="true" />
+            <element signature="e#4093#4581#0" expanded="false" />
+            <element signature="e#4580#4581#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2863,15 +2867,15 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/adapter/StatusAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="39" selection-start-line="38" selection-start-column="39" selection-end-line="38" selection-end-column="39" />
+          <caret line="34" column="39" selection-start-line="34" selection-start-column="39" selection-end-line="34" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/status_list.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12801932">
-          <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.40338165">
+          <caret line="31" column="37" selection-start-line="31" selection-start-column="37" selection-end-line="31" selection-end-column="37" />
           <folding />
         </state>
       </provider>
