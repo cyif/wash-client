@@ -119,7 +119,7 @@ public class MachineAdapter extends ArrayAdapter<WashMachine> {
             }
             else
                 time = sec + "秒";
-            statusView.setText("剩余时间: " + time);
+            statusView.setText("" + time);
         }
     }
 }
