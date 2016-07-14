@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.zju.chen.wash_client.R;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity
     private CustomApplication app;
 
     private ListView lv;
+    private TextView accountTextView;
     private RoomController roomController;
     private RoomAdapter roomAdapter;
 
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        app = (CustomApplication)getApplication();
+        app = (CustomApplication) getApplication();
 
         lv = (ListView)findViewById(R.id.listView);
         //lv.toString();
@@ -74,6 +76,9 @@ public class MainActivity extends AppCompatActivity
         //String[] test = new String[] {"1", "22", "333"};
 
         //ListView lv = (ListView)findViewById(R.id.listView);
+
+        accountTextView = (TextView)navigationView.getHeaderView(0).findViewById(R.id.accountTextView);
+        accountTextView.setText(app.getAccountName());
 
         imageButton=(ImageButton)findViewById(R.id.code);
         imageButton.setOnClickListener(new Button.OnClickListener(){

@@ -75,17 +75,17 @@ public class WashMachineController {
                             format.setTimeZone(TimeZone.getTimeZone("GMT"));*/
 
                             DateFormat format=new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US);
-                            format.setTimeZone(TimeZone.getTimeZone("GMT"));
-                            try {
-                                VolleyLog.d("DATE!!!!!     %s", format.parse("Mon, 03 Jun 2013 07:01:29 GMT").toString());
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
+                            //format.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+                            //VolleyLog.d("DATE!!!!!     %s", format.format("Mon, 03 Jun 2013 07:01:29 GMT").toString());
+
+                            VolleyLog.d("DATE!!!!!     %s", jsonArray.toString());
+
                             machineList = JacksonUtil.parseJson(jsonArray.toString(), new TypeReference<List<WashMachine>>() {
                             }, format);
 
                             machineList.add(0, new WashMachine(-1, 0, -1, null, null));
-                            Log.d("MachineList.size()", machineList.size() + "");
+                            Log.d("MachineList!!!!!!", machineList.toArray().toString());
+
                             Message msg = new Message();
                             msg.what = 1;
                             handler.sendMessage(msg);

@@ -13,6 +13,8 @@ import com.zju.chen.wash_client.R;
 import com.zju.chen.wash_client.model.Room;
 import com.zju.chen.wash_client.model.WashMachine;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -58,14 +60,19 @@ public class MachineAdapter extends ArrayAdapter<WashMachine> {
                 break;
         }
 
-        time *= 1000;
+       // time *= 1000;
         /*if (washMachine.getBeginTime() != null && washMachine.getEndTime() != null)
             if (washMachine.getEndTime() == null) {
                 time -= new Date().getTime() - washMachine.getBeginTime().getTime();
             }
             else*/
-        if (washMachine.getBeginTime() != null && washMachine.getEndTime() != null)
-                time = washMachine.getEndTime().getTime() - washMachine.getBeginTime().getTime();
+        /*if (washMachine.getBeginTime() != null && washMachine.getEndTime() != null)
+                time = washMachine.getEndTime().getTime() - washMachine.getBeginTime().getTime();*/
+
+        if (washMachine.getEndTime() != null) {
+            time = washMachine.getEndTime().getTime() - new Date().getTime();
+            Log.d("Time!!!!!    ", washMachine.getEndTime().toString() + "        " + new Date().toString());
+        }
 
         Log.d("Time!!!!!", time + "");
         TimeCount timeCount = new TimeCount(time, 1000, timeText);

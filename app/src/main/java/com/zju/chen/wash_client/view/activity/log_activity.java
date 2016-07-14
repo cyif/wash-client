@@ -15,14 +15,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.zju.chen.wash_client.R;
+import com.zju.chen.wash_client.model.DealLog;
 import com.zju.chen.wash_client.net.DealLogController;
 import com.zju.chen.wash_client.net.RoomController;
 import com.zju.chen.wash_client.util.CustomApplication;
 import com.zju.chen.wash_client.view.adapter.LogAdapter;
 import com.zju.chen.wash_client.view.adapter.RoomAdapter;
 import com.zju.chen.wash_client.zxing.activity.CaptureActivity;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by ab on 2016/7/9.
@@ -33,6 +38,7 @@ public class log_activity extends AppCompatActivity implements NavigationView.On
     private Handler handler;
     private DealLogController dealLogController;
     private LogAdapter logAdapter;
+    private TextView accountTextView;
     ImageButton imageButton;
 
     private ListView lv;
@@ -44,7 +50,6 @@ public class log_activity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_log);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -58,6 +63,8 @@ public class log_activity extends AppCompatActivity implements NavigationView.On
 
 
         lv = (ListView)findViewById(R.id.listView);
+        accountTextView = (TextView)navigationView.getHeaderView(0).findViewById(R.id.accountTextView);
+        accountTextView.setText(app.getAccountName());
 
         imageButton=(ImageButton)findViewById(R.id.code);
         imageButton.setOnClickListener(new Button.OnClickListener(){
@@ -80,7 +87,9 @@ public class log_activity extends AppCompatActivity implements NavigationView.On
             public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case 1:
-                        logAdapter = new LogAdapter(log_activity.this, R.layout.log_list, dealLogController.getDealLogList());
+                        List<DealLog> dealLogs = dealLogController.getDealLogList();
+                        Collections.reverse(dealLogs);
+                        logAdapter = new LogAdapter(log_activity.this, R.layout.log_list, dealLogs);
                         lv.setAdapter(logAdapter);
                         break;
                     default:

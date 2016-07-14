@@ -13,12 +13,14 @@ import com.zju.chen.wash_client.model.Room;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by chen on 16/7/10.
  */
-public class    LogAdapter extends ArrayAdapter<DealLog> {
+public class LogAdapter extends ArrayAdapter<DealLog> {
 
     private int mResourceId;
 

@@ -12,8 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.zju.chen.wash_client.R;
+import com.zju.chen.wash_client.util.CustomApplication;
 import com.zju.chen.wash_client.zxing.activity.CaptureActivity;
 
 /**
@@ -21,6 +23,8 @@ import com.zju.chen.wash_client.zxing.activity.CaptureActivity;
  */
 public class status_activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     ImageButton imageButton;
+    CustomApplication app;
+    TextView accountTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -29,6 +33,7 @@ public class status_activity extends AppCompatActivity implements NavigationView
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        app = (CustomApplication) getApplication();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -39,6 +44,10 @@ public class status_activity extends AppCompatActivity implements NavigationView
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().findItem(R.id.nav_status).setChecked(true);
+
+
+        accountTextView = (TextView)navigationView.getHeaderView(0).findViewById(R.id.accountTextView);
+        accountTextView.setText(app.getAccountName());
 
         imageButton=(ImageButton)findViewById(R.id.code);
         imageButton.setOnClickListener(new Button.OnClickListener(){
