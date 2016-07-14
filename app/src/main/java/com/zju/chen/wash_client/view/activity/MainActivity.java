@@ -104,7 +104,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        NotifyUtil.sendNotify(this, "您有新的消息推送", "洗衣完成!", "你在XXX机器上的洗衣已完成");
     }
 
 
@@ -215,30 +214,5 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        PackageManager pm = getPackageManager();
-        ResolveInfo homeInfo =
-                pm.resolveActivity(new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME), 0);
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            ActivityInfo ai = homeInfo.activityInfo;
-            Intent startIntent = new Intent(Intent.ACTION_MAIN);
-            startIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-            startIntent.setComponent(new ComponentName(ai.packageName, ai.name));
-            startActivitySafely(startIntent);
-            return true;
-        } else
-            return super.onKeyDown(keyCode, event);
-    }
-    private void startActivitySafely(Intent intent) {
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        try {
-            startActivity(intent);
-        } catch (ActivityNotFoundException e) {
-            Toast.makeText(this, "null",
-                    Toast.LENGTH_SHORT).show();
-        } catch (SecurityException e) {
-            Toast.makeText(this, "null",
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
+
 }

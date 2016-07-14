@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.zju.chen.wash_client.R;
 import com.zju.chen.wash_client.model.WashMachine;
+import com.zju.chen.wash_client.util.NotifyUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -19,10 +20,13 @@ import java.util.List;
  * Created by ab on 2016/7/13.
  */
 public class StatusAdapter extends ArrayAdapter<WashMachine> {
+
+    private Context context;
     private int mResourceId;
     public StatusAdapter(Context context, int resourceId, List<WashMachine> objects) {
         super(context, resourceId, objects);
         this.mResourceId = resourceId;
+        this.context = context;
     }
 
     @Override
@@ -38,7 +42,7 @@ public class StatusAdapter extends ArrayAdapter<WashMachine> {
         if(washMachine.getStatus()==1){
             if(washMachine.getEndTime()!=null){
                 time=washMachine.getEndTime().getTime()-new Date().getTime();
-                TimeCount timeCount = new TimeCount(time, 1000, status_info);
+                TimeCount timeCount = new TimeCount(time, 1000, status_info, washMachine.getId());
                 timeCount.start();
             }
             //status_image.setImageResource();
@@ -49,11 +53,14 @@ public class StatusAdapter extends ArrayAdapter<WashMachine> {
 
         return view;
     }
+
     class TimeCount extends CountDownTimer{
         TextView tv;
-        public TimeCount(long millisInFuture, long countDownInterval, View textView){
+        private int washId;
+        public TimeCount(long millisInFuture, long countDownInterval, View textView, int id){
             super(millisInFuture, countDownInterval);
             tv = (TextView)textView;
+            this.washId = id;
         }
         @Override
         public void onTick(long millisUntilFinished){
@@ -76,6 +83,7 @@ public class StatusAdapter extends ArrayAdapter<WashMachine> {
         }
         @Override
         public void onFinish() {
+            NotifyUtil.sendNotify(context, "洗衣完成", "洗衣完成！", "您在" + washId + "机器的衣服已洗完");
             tv.setText("洗衣结束，请尽快拿走衣服");
         }
     }
