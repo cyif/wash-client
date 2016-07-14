@@ -4,11 +4,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request.Method;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.zju.chen.wash_client.model.Room;
 import com.zju.chen.wash_client.model.WashMachine;
@@ -27,6 +29,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 
 /**
@@ -72,17 +75,17 @@ public class WashMachineController {
                             format.setTimeZone(TimeZone.getTimeZone("GMT"));*/
 
                             DateFormat format=new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US);
-                            format.setTimeZone(TimeZone.getTimeZone("GMT"));
-                            try {
-                                VolleyLog.d("DATE!!!!!     %s", format.parse("Mon, 03 Jun 2013 07:01:29 GMT").toString());
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
+                            //format.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+                            //VolleyLog.d("DATE!!!!!     %s", format.format("Mon, 03 Jun 2013 07:01:29 GMT").toString());
+
+                            VolleyLog.d("DATE!!!!!     %s", jsonArray.toString());
+
                             machineList = JacksonUtil.parseJson(jsonArray.toString(), new TypeReference<List<WashMachine>>() {
                             }, format);
 
                             machineList.add(0, new WashMachine(-1, 0, -1, null, null));
-                            Log.d("MachineList.size()", machineList.size() + "");
+                            Log.d("MachineList!!!!!!", machineList.toArray().toString());
+
                             Message msg = new Message();
                             msg.what = 1;
                             handler.sendMessage(msg);
@@ -103,29 +106,31 @@ public class WashMachineController {
     }
 
     public void startWashMachine(final Handler handler, int id,
-                                 String account, int type, double money) {
+                                 final String account, final int type, final double money) {
 
-        params = "/user/wash/begin/" + id;
+        params = "/user/begin/" + id;
         httpUrl = url + params;
 
-        HashMap<String, String> map = new HashMap<>();
-        map.put("account_name", account);
-        map.put("wash_type", type + "");
-        map.put("wash_money", money + "");
 
-        JSONObject jsonObject = new JSONObject(map);
 
+<<<<<<< HEAD
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Method.POST, httpUrl, jsonObject,
                 new Response.Listener<JSONObject>() {
+=======
+        VolleyLog.d("URL!!!!!!!!!!!   %s", httpUrl);
+        StringRequest stringRequest = new StringRequest(Method.POST, httpUrl,
+                new Response.Listener<String>() {
+>>>>>>> b2444b997a44a87664613f38cbc882e3e958e735
                     @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            Message msg = new Message();
+                    public void onResponse(String response) {
+                        //VolleyLog.d("StartWashMachine-----------------");
+
+                            /*Message msg = new Message();
                             msg.what = response.getInt("code");
-                            handler.sendMessage(msg);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                            handler.sendMessage(msg);*/
+                            VolleyLog.d("StartWashMachine!!!!!       %s", response);
+
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -136,7 +141,22 @@ public class WashMachineController {
                         handler.sendMessage(msg);
                         error.printStackTrace();
                     }
+<<<<<<< HEAD
                 });
         RequestManager.getInstance().getRequestQueue().add(jsonObjectRequest);
+=======
+                }){
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> map = new HashMap<>();
+                        map.put("account_name", account);
+                        map.put("wash_money", money + "");
+                        map.put("wash_type", type + "");
+                        return map;
+                    }
+        };
+
+        RequestManager.getInstance().getRequestQueue().add(stringRequest);
+>>>>>>> b2444b997a44a87664613f38cbc882e3e958e735
     }
 }

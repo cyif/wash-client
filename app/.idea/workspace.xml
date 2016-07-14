@@ -22,17 +22,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f031f1be-f5a9-4db1-86ef-4286e04f00e9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/net/PayController.java" afterPath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/net/PayController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/net/WashMachineController.java" afterPath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/net/WashMachineController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/MachineAcitvity.java" afterPath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/MachineAcitvity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/MainActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/choose_activity.java" afterPath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/choose_activity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/log_activity.java" afterPath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/log_activity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/status_activity.java" afterPath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/status_activity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/activity_status.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_status.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/content_status.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/content_status.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/src/main/res/values/styles.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/adapter/LogAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/adapter/LogAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/adapter/MachineAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/adapter/MachineAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/res/layout/nav_header_main.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/nav_header_main.xml" />
     </list>
     <ignored path="app.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -57,10 +55,22 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="145" column="44" selection-start-line="143" selection-start-column="12" selection-end-line="145" selection-end-column="44" />
+              <caret line="149" column="44" selection-start-line="147" selection-start-column="12" selection-end-line="149" selection-end-column="44" />
               <folding>
-                <element signature="e#2861#3092#0" expanded="true" />
-                <element signature="e#3091#3092#0" expanded="true" />
+                <element signature="e#3060#3291#0" expanded="true" />
+                <element signature="e#3290#3291#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="status_activity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/status_activity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5720721">
+              <caret line="159" column="30" selection-start-line="159" selection-start-column="30" selection-end-line="159" selection-end-column="30" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -130,7 +140,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_login.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="activity_login.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_login.xml">
           <provider selected="true" editor-type-id="android-designer">
             <state />
@@ -143,12 +153,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MachineAcitvity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/MachineAcitvity.java">
+      <file leaf-file-name="log_activity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/log_activity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="84" column="39" selection-start-line="84" selection-start-column="39" selection-end-line="84" selection-end-column="39" />
-              <folding />
+            <state vertical-scroll-proportion="-5.678571">
+              <caret line="161" column="32" selection-start-line="161" selection-start-column="32" selection-end-line="161" selection-end-column="32" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1800,13 +1812,11 @@
         <option value="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/adapter/ChooseAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/choose_activity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/net/WashMachineController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/log_activity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/adapter/StatusAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/content_status.xml" />
         <option value="$PROJECT_DIR$/src/main/res/layout/status_list.xml" />
         <option value="$PROJECT_DIR$/src/main/res/layout/activity_status.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/status_activity.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/activity.xml" />
         <option value="$PROJECT_DIR$/src/main/res/layout/actitiyt_login.xml" />
         <option value="$PROJECT_DIR$/src/main/AndroidManifest.xml" />
@@ -1815,6 +1825,8 @@
         <option value="$PROJECT_DIR$/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/res/layout/activity_login.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/log_activity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/status_activity.java" />
       </list>
     </option>
   </component>
@@ -2534,6 +2546,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="20" column="20" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="20" />
+          <folding>
+            <element signature="e#670#671#0" expanded="true" />
+            <element signature="e#702#703#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2566,7 +2582,6 @@
           <folding>
             <element signature="imports" expanded="false" />
             <element signature="e#2705#2706#0" expanded="false" />
-            <element signature="e#2753#2754#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2618,16 +2633,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="26" column="34" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/status_activity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-          <folding>
-            <element signature="e#5566#5579#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2710,17 +2715,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/log_activity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="69" column="50" selection-start-line="68" selection-start-column="16" selection-end-line="69" selection-end-column="50" />
-          <folding>
-            <element signature="e#2543#2774#0" expanded="true" />
-            <element signature="e#2773#2774#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/MachineAcitvity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2732,10 +2726,10 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="145" column="44" selection-start-line="143" selection-start-column="12" selection-end-line="145" selection-end-column="44" />
+          <caret line="149" column="44" selection-start-line="147" selection-start-column="12" selection-end-line="149" selection-end-column="44" />
           <folding>
-            <element signature="e#2861#3092#0" expanded="true" />
-            <element signature="e#3091#3092#0" expanded="true" />
+            <element signature="e#3060#3291#0" expanded="true" />
+            <element signature="e#3290#3291#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2808,6 +2802,26 @@
         <state vertical-scroll-proportion="-8.321428">
           <caret line="39" column="48" selection-start-line="39" selection-start-column="48" selection-end-line="39" selection-end-column="48" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/log_activity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.678571">
+          <caret line="161" column="32" selection-start-line="161" selection-start-column="32" selection-end-line="161" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/zju/chen/wash_client/view/activity/status_activity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5720721">
+          <caret line="159" column="30" selection-start-line="159" selection-start-column="30" selection-end-line="159" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

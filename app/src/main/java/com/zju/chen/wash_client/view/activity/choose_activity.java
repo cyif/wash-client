@@ -27,7 +27,9 @@ import com.zju.chen.wash_client.model.Deal;
 import com.zju.chen.wash_client.model.Room;
 import com.zju.chen.wash_client.model.Type;
 import com.zju.chen.wash_client.model.Code;
+import com.zju.chen.wash_client.model.WashMachine;
 import com.zju.chen.wash_client.net.PayController;
+import com.zju.chen.wash_client.net.WashMachineController;
 import com.zju.chen.wash_client.util.CustomApplication;
 import com.zju.chen.wash_client.view.adapter.ChooseAdapter;
 import com.zju.chen.wash_client.view.adapter.LogAdapter;
@@ -50,6 +52,7 @@ public class choose_activity extends AppCompatActivity {
     ChooseAdapter adapter;
 
     private Code code;
+    private int status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -82,6 +85,7 @@ public class choose_activity extends AppCompatActivity {
                                     }
                                 })
                                 .show();
+                        startWashMachine(msg.getData().getInt("status"), deal.getMoney());
                         break;
                     case -1:
                         new AlertDialog.Builder(choose_activity.this)
@@ -111,6 +115,7 @@ public class choose_activity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 PayController payController = new PayController();
                                 payController.setUrl(app.getUrl2());
+                                payController.setStatus(status);
                                 payController.setDeal(deal);
                                 payController.postDeal(handler);
                             }
@@ -161,6 +166,7 @@ public class choose_activity extends AppCompatActivity {
             Type choose=(Type)parent.getItemAtPosition(position);
             deal.setMoney(choose.getPrice());
             deal.setTo(code.getAccount());
+            status = choose.getStatus();
             adapter.setSelection(position);
             adapter.notifyDataSetChanged();
 
@@ -169,4 +175,10 @@ public class choose_activity extends AppCompatActivity {
             Log.d("!!!!!!!","visible");
         }
     };
+
+    private void startWashMachine(int status, double money) {
+        WashMachineController wmc = new WashMachineController();
+        wmc.setUrl(app.getUrl());
+        wmc.startWashMachine(new Handler(), code.getWashId(), app.getAccountName(), status, money);
+    }
 }

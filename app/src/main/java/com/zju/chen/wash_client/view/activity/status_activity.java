@@ -17,6 +17,7 @@ import android.widget.GridView;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.zju.chen.wash_client.R;
@@ -25,6 +26,7 @@ import com.zju.chen.wash_client.model.WashMachine;
 import com.zju.chen.wash_client.util.JacksonUtil;
 import com.zju.chen.wash_client.view.adapter.ChooseAdapter;
 import com.zju.chen.wash_client.view.adapter.StatusAdapter;
+import com.zju.chen.wash_client.util.CustomApplication;
 import com.zju.chen.wash_client.zxing.activity.CaptureActivity;
 
 import java.util.ArrayList;
@@ -42,6 +44,8 @@ public class status_activity extends AppCompatActivity implements NavigationView
     private int LIEWIDTH;
     StatusAdapter adapter;
     private WashMachine washMachine;
+    CustomApplication app;
+    TextView accountTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -50,6 +54,7 @@ public class status_activity extends AppCompatActivity implements NavigationView
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        app = (CustomApplication) getApplication();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -60,6 +65,10 @@ public class status_activity extends AppCompatActivity implements NavigationView
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().findItem(R.id.nav_status).setChecked(true);
+
+
+        accountTextView = (TextView)navigationView.getHeaderView(0).findViewById(R.id.accountTextView);
+        accountTextView.setText(app.getAccountName());
 
         imageButton=(ImageButton)findViewById(R.id.code);
         imageButton.setOnClickListener(new Button.OnClickListener(){
