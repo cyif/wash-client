@@ -8,5 +8,6 @@
 
     <string name="msg_camera_framework_bug">Sorry, the Android camera encountered a problem. You may need to restart the device.</string>
     <string name="button_ok">OK</string>
+    <string name="icon">icon</string>
 
 </resources>

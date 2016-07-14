@@ -30,6 +30,8 @@ import com.zju.chen.wash_client.view.adapter.MachineAdapter;
 import com.zju.chen.wash_client.view.adapter.RoomAdapter;
 import com.zju.chen.wash_client.zxing.activity.CaptureActivity;
 
+import org.w3c.dom.Text;
+
 import java.util.Date;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -61,6 +63,9 @@ public class MachineAcitvity extends AppCompatActivity {
 
         Bundle extra = getIntent().getExtras();
         room = extra.getInt("Room");
+
+        TextView title = (TextView)findViewById(R.id.title);
+        title.setText("房间: " + room);
 
         lv = (ListView)findViewById(R.id.machineListView);
 
