@@ -99,7 +99,7 @@ public class MachineAdapter extends ArrayAdapter<WashMachine> {
         @Override
         public void onFinish() {
             statusView.setText("可用");
-            imageView.setImageResource(R.drawable.washmachine_red);
+            imageView.setImageResource(R.drawable.washmachine_green);
         }
 
         @Override

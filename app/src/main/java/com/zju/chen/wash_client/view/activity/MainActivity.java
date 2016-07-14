@@ -1,8 +1,19 @@
 package com.zju.chen.wash_client.view.activity;
 
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,6 +25,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +34,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.zju.chen.wash_client.R;
@@ -30,6 +43,7 @@ import com.zju.chen.wash_client.model.Room;
 import com.zju.chen.wash_client.net.RoomController;
 import com.zju.chen.wash_client.util.CustomApplication;
 import com.zju.chen.wash_client.util.JacksonUtil;
+import com.zju.chen.wash_client.util.NotifyUtil;
 import com.zju.chen.wash_client.view.adapter.RoomAdapter;
 import com.zju.chen.wash_client.zxing.activity.CaptureActivity;
 
@@ -83,12 +97,14 @@ public class MainActivity extends AppCompatActivity
         accountTextView.setText(app.getAccountName());
 
         imageButton=(ImageButton)findViewById(R.id.code);
-        imageButton.setOnClickListener(new Button.OnClickListener(){
-            public void onClick(View v){
+        imageButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CaptureActivity.class);
                 startActivityForResult(intent, 1);
             }
         });
+
+        NotifyUtil.sendNotify(this, "您有新的消息推送", "洗衣完成!", "你在XXX机器上的洗衣已完成");
     }
 
 
@@ -197,5 +213,32 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        PackageManager pm = getPackageManager();
+        ResolveInfo homeInfo =
+                pm.resolveActivity(new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME), 0);
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            ActivityInfo ai = homeInfo.activityInfo;
+            Intent startIntent = new Intent(Intent.ACTION_MAIN);
+            startIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+            startIntent.setComponent(new ComponentName(ai.packageName, ai.name));
+            startActivitySafely(startIntent);
+            return true;
+        } else
+            return super.onKeyDown(keyCode, event);
+    }
+    private void startActivitySafely(Intent intent) {
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, "null",
+                    Toast.LENGTH_SHORT).show();
+        } catch (SecurityException e) {
+            Toast.makeText(this, "null",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 }

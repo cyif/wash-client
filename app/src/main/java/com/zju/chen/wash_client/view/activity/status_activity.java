@@ -1,6 +1,11 @@
 package com.zju.chen.wash_client.view.activity;
 
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,6 +17,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +26,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.zju.chen.wash_client.R;
@@ -209,5 +216,32 @@ public class status_activity extends AppCompatActivity implements NavigationView
         gridView.setStretchMode(GridView.NO_STRETCH);
         int count = adapter.getCount();
         gridView.setNumColumns(count);
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        PackageManager pm = getPackageManager();
+        ResolveInfo homeInfo =
+                pm.resolveActivity(new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME), 0);
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            ActivityInfo ai = homeInfo.activityInfo;
+            Intent startIntent = new Intent(Intent.ACTION_MAIN);
+            startIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+            startIntent.setComponent(new ComponentName(ai.packageName, ai.name));
+            startActivitySafely(startIntent);
+            return true;
+        } else
+            return super.onKeyDown(keyCode, event);
+    }
+    private void startActivitySafely(Intent intent) {
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, "null",
+                    Toast.LENGTH_SHORT).show();
+        } catch (SecurityException e) {
+            Toast.makeText(this, "null",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 }
