@@ -33,6 +33,8 @@ import com.zju.chen.wash_client.zxing.activity.CaptureActivity;
 import java.util.Collections;
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 /**
  * Created by ab on 2016/7/9.
  */
@@ -156,9 +158,10 @@ public class log_activity extends AppCompatActivity implements NavigationView.On
             }, null);
 
             if (code == null) {
-                new AlertDialog.Builder(this).setTitle("错误！")
-                        .setMessage("数据格式错误！")
-                        .setPositiveButton("确定", null)
+                new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("出错")
+                        .setContentText("数据格式错误！")
+                        .setConfirmText("确定")
                         .show();
             } else {
                 Intent intent = new Intent(this, choose_activity.class);

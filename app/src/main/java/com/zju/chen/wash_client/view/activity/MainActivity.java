@@ -38,6 +38,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -182,9 +184,10 @@ public class MainActivity extends AppCompatActivity
             }, null);
 
             if (code == null) {
-                new AlertDialog.Builder(this).setTitle("错误！")
-                        .setMessage("数据格式错误！")
-                        .setPositiveButton("确定", null)
+                new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("出错")
+                        .setContentText("数据格式错误！")
+                        .setConfirmText("确定")
                         .show();
             }
             else {

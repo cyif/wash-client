@@ -9,6 +9,7 @@ import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -30,6 +31,8 @@ import com.zju.chen.wash_client.view.adapter.RoomAdapter;
 import com.zju.chen.wash_client.zxing.activity.CaptureActivity;
 
 import java.util.Date;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by chen on 16/7/9.
@@ -61,13 +64,27 @@ public class MachineAcitvity extends AppCompatActivity {
 
         lv = (ListView)findViewById(R.id.machineListView);
 
+        imageButton=(ImageButton)findViewById(R.id.code);
+        imageButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MachineAcitvity.this, CaptureActivity.class);
+                startActivityForResult(intent, 1);
+            }
+        });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
         washMachineController = new WashMachineController();
         washMachineController.setUrl(app.getUrl());
+        Log.d("SHOW!!!!", "11111111111");
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case 1:
+                        Log.d("SHOW!!!!", "222222222222");
                         machineAdapter = new MachineAdapter(MachineAcitvity.this,
                                 R.layout.machine_list,
                                 washMachineController.getMachineList());
@@ -80,15 +97,9 @@ public class MachineAcitvity extends AppCompatActivity {
             }
         };
         washMachineController.getWashMachineByRoom(handler, room);
-
-        imageButton=(ImageButton)findViewById(R.id.code);
-        imageButton.setOnClickListener(new Button.OnClickListener(){
-            public void onClick(View v){
-                Intent intent = new Intent(MachineAcitvity.this, CaptureActivity.class);
-                startActivityForResult(intent, 1);
-            }
-        });
     }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
@@ -98,11 +109,13 @@ public class MachineAcitvity extends AppCompatActivity {
             }, null);
 
             if (code == null) {
-                new AlertDialog.Builder(this).setTitle("错误！")
-                        .setMessage("数据格式错误！")
-                        .setPositiveButton("确定", null)
+                new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("出错")
+                        .setContentText("数据格式错误！")
+                        .setConfirmText("确定")
                         .show();
-            } else {
+            }
+            else {
                 Intent intent = new Intent(this, choose_activity.class);
                 intent.putExtra("Code", code);
                 startActivity(intent);

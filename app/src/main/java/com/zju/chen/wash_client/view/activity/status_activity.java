@@ -2,6 +2,8 @@ package com.zju.chen.wash_client.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -22,15 +24,22 @@ import android.widget.TextView;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.zju.chen.wash_client.R;
 import com.zju.chen.wash_client.model.Code;
+import com.zju.chen.wash_client.model.DealLog;
 import com.zju.chen.wash_client.model.WashMachine;
+import com.zju.chen.wash_client.net.DealLogController;
+import com.zju.chen.wash_client.net.WashMachineController;
 import com.zju.chen.wash_client.util.JacksonUtil;
 import com.zju.chen.wash_client.view.adapter.ChooseAdapter;
+import com.zju.chen.wash_client.view.adapter.LogAdapter;
 import com.zju.chen.wash_client.view.adapter.StatusAdapter;
 import com.zju.chen.wash_client.util.CustomApplication;
 import com.zju.chen.wash_client.zxing.activity.CaptureActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by ab on 2016/7/8.
@@ -46,6 +55,9 @@ public class status_activity extends AppCompatActivity implements NavigationView
     private WashMachine washMachine;
     CustomApplication app;
     TextView accountTextView;
+    private Handler handler;
+    private WashMachineController washMachineController;
+    private StatusAdapter statusAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -84,8 +96,34 @@ public class status_activity extends AppCompatActivity implements NavigationView
         horizontalScrollView.setHorizontalScrollBarEnabled(false);
         getScreenDen();
         LIEWIDTH=dm.widthPixels/numPerLine;
-        setValue();
+
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        washMachineController = new WashMachineController();
+        washMachineController.setUrl(app.getUrl2());
+
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
+                    case 1:
+                        List<WashMachine> washMachineList = washMachineController.getMachineList();
+                        setValue(washMachineList);
+                        break;
+                    default:
+                        super.handleMessage(msg);
+                        break;
+                }
+            }
+        };
+
+        washMachineController.getWashMachineByAccount(handler, app.getAccountName());
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -135,9 +173,10 @@ public class status_activity extends AppCompatActivity implements NavigationView
             }, null);
 
             if (code == null) {
-                new AlertDialog.Builder(this).setTitle("错误！")
-                        .setMessage("数据格式错误！")
-                        .setPositiveButton("确定", null)
+                new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("出错")
+                        .setContentText("数据格式错误！")
+                        .setConfirmText("确定")
                         .show();
             } else {
                 Intent intent = new Intent(this, choose_activity.class);
@@ -150,14 +189,8 @@ public class status_activity extends AppCompatActivity implements NavigationView
         dm=new DisplayMetrics() ;
         getWindowManager().getDefaultDisplay().getMetrics(dm);
     }
-    private void setValue(){
-        List<WashMachine> washMachines= new ArrayList<WashMachine>();
-        WashMachine wm1=new WashMachine();
-        wm1.setId(1);wm1.setStatus(1);
-        WashMachine wm2=new WashMachine();
-        wm2.setStatus(0);wm2.setId(2);
-        washMachines.add(wm1);
-        washMachines.add(wm2);
+
+    private void setValue(List<WashMachine> washMachines){
 
         adapter=new StatusAdapter(this, R.layout.status_list,washMachines);
         gridView.setAdapter(adapter);
