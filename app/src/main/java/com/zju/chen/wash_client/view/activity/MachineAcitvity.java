@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -76,6 +78,9 @@ public class MachineAcitvity extends AppCompatActivity {
                 startActivityForResult(intent, 1);
             }
         });
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
 
     @Override
