@@ -154,6 +154,7 @@ public class WashMachineController {
         httpUrl = url + params;
 
         VolleyLog.d("URL!!!!!!!!!!!   %s", httpUrl);
+        VolleyLog.d("PARA!!!!!!!!! %s", account + type + money);
         StringRequest stringRequest = new StringRequest(Method.POST, httpUrl,
                 new Response.Listener<String>() {
                     @Override
