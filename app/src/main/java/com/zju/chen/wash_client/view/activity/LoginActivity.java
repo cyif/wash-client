@@ -38,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         accountEditText = (EditText)findViewById(R.id.phone);
+        accountEditText.setText(account);
         veriCodeEditText = (EditText)findViewById(R.id.vericode);
 
         Button get_code=(Button)findViewById(R.id.get_code);
@@ -98,9 +99,10 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (veriCodeEditText.getText().toString().equals(loginController.getVerifyCode())
                         || veriCodeEditText.getText().toString().equals("0")) {
-                    app.setAccountName(account);
 
                     account = accountEditText.getText().toString();
+                    app.setAccountName(account);
+
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
