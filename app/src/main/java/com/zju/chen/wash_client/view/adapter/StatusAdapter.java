@@ -83,8 +83,21 @@ public class StatusAdapter extends ArrayAdapter<WashMachine> {
         }
         @Override
         public void onFinish() {
-            NotifyUtil.sendNotify(context, "洗衣完成", "洗衣完成！", "您在" + washId + "机器的衣服已洗完");
+
             tv.setText("洗衣结束，请尽快拿走衣服");
+            notify ntf=new notify(context,washId);
+            ntf.start();
+        }
+    }
+    class notify extends Thread{
+        Context context;
+        int washId;
+        public notify(Context context,int washId){
+            this.context=context;
+            this.washId=washId;
+        }
+        public void run(){
+            NotifyUtil.sendNotify(context, "洗衣完成", "洗衣完成！", "您在" + washId + "机器的衣服已洗完");
         }
     }
 }

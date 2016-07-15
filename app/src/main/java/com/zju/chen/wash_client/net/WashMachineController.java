@@ -98,6 +98,7 @@ public class WashMachineController {
                         Message msg = new Message();
                         msg.what = -1;
                         handler.sendMessage(msg);
+                        Log.d("SHOW!!!!!!!", error.getMessage());
                         error.getStackTrace();
                     }
                 });

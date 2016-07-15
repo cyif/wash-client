@@ -132,6 +132,16 @@ public class choose_activity extends AppCompatActivity {
                         break;
                     default:
                         super.handleMessage(msg);
+                        sad.setTitleText("异常错误")
+                                .setContentText("支付出现异常，请重试")
+                                .setCancelText("取消")
+                                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        sweetAlertDialog.hide();
+                                    }
+                                })
+                                .changeAlertType(SweetAlertDialog.WARNING_TYPE);
                         break;
                 }
             }
