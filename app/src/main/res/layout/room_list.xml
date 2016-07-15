@@ -6,17 +6,34 @@
     android:weightSum="1"
     android:gravity="center_horizontal">
 
-    <TextView
-        android:layout_width="138dp"
-        android:layout_height="60dp"
-        android:text=""
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/room" />
+    <ImageView
+        android:id="@+id/washMachineStateImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxHeight="72dp"
+        android:maxWidth="72dp"
+        android:paddingBottom="20dp"
+        android:paddingRight="10dp"
+        android:paddingTop="20dp"
+        android:src="@drawable/room"
+        android:contentDescription="@string/icon" />
 
     <TextView
+        android:layout_marginTop="5dp"
+        android:layout_width="150dp"
+        android:layout_height="62dp"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/room"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:text=""
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/num" />
+        android:id="@+id/num"
+        android:gravity="center"/>
 </LinearLayout>

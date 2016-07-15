@@ -63,6 +63,7 @@ public class WashMachineController {
         params = "/user/status/one?room=";
         httpUrl = url + params + room;
 
+        Log.d("SHOW!!!!!!!!!", httpUrl);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(httpUrl, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -70,6 +71,8 @@ public class WashMachineController {
                         try {
                             JSONArray jsonArray = response.getJSONArray("result");
 
+                            Message msg = new Message();
+                            msg.what = response.getInt("code");
                             VolleyLog.d("@@@@@@@@@@@@%s", jsonArray.toString());
                             /*DateFormat format=new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z");
                             format.setTimeZone(TimeZone.getTimeZone("GMT"));*/
@@ -83,8 +86,6 @@ public class WashMachineController {
                             machineList = JacksonUtil.parseJson(jsonArray.toString(), new TypeReference<List<WashMachine>>() {
                             }, format);
 
-                            Message msg = new Message();
-                            msg.what = 1;
                             handler.sendMessage(msg);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -94,6 +95,9 @@ public class WashMachineController {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Message msg = new Message();
+                        msg.what = -1;
+                        handler.sendMessage(msg);
                         error.getStackTrace();
                     }
                 });

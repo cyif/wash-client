@@ -1,5 +1,8 @@
 package com.zju.chen.wash_client.net;
 
+import android.os.Handler;
+import android.os.Message;
+
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -18,7 +21,7 @@ public class LoginController {
     private String url;
     private String params;
 
-    public void sendVerifyCode() {
+    public void sendVerifyCode(final Handler handler) {
         String httpUrl = url + params + account;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(httpUrl,
@@ -27,7 +30,10 @@ public class LoginController {
                     public void onResponse(JSONObject response) {
 
                         try {
+                            Message message = new Message();
+                            message.what = response.getInt("code");
                             verifyCode = response.getString("vericode");
+                            handler.sendMessage(message);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -36,6 +42,9 @@ public class LoginController {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Message message = new Message();
+                        message.what = -2;
+                        handler.sendMessage(message);
                         error.printStackTrace();
                     }
                 });

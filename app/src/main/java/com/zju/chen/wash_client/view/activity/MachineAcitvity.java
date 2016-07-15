@@ -88,7 +88,7 @@ public class MachineAcitvity extends AppCompatActivity {
             @Override
             public void handleMessage(Message msg) {
                 switch (msg.what) {
-                    case 1:
+                    case 0:
                         Log.d("SHOW!!!!", "222222222222");
                         machineAdapter = new MachineAdapter(MachineAcitvity.this,
                                 R.layout.machine_list,
@@ -97,6 +97,11 @@ public class MachineAcitvity extends AppCompatActivity {
                         break;
                     default:
                         super.handleMessage(msg);
+                        new SweetAlertDialog(MachineAcitvity.this, SweetAlertDialog.WARNING_TYPE)
+                                .setTitleText("错误")
+                                .setContentText("数据获取失败")
+                                .setConfirmText("确认")
+                                .show();
                         break;
                 }
             }

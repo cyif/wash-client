@@ -13,10 +13,18 @@
     tools:context=".view.activity.MainActivity"
     android:id="@+id/i">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/title"
+        android:text="洗衣记录"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/listView"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/title" />
 </RelativeLayout>

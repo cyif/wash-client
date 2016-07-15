@@ -25,8 +25,10 @@
         android:layout_height="match_parent"
         android:id="@+id/machineListView"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/title"
         android:divider="#0FF"
         android:dividerHeight="1px"
-        android:layout_margin="10dip"/>
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginBottom="10dip"
+        android:layout_below="@+id/title" />
 </RelativeLayout>
